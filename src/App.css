@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* mobile CSS */
 .mobile-menu-button {
   display: none;
@@ -396,5 +400,86 @@
   }
   .footer-links ul {
     align-items: center;
+  }
+}
+/* home page styles CSS */
+
+.home-banner {
+  background: url("./assets/template_assets/banner/banner.png") no-repeat center center;
+  background-size: cover;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #f7f4e7;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.home-banner-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background: rgba(24, 66, 94, 0.7);
+  border-radius: 12px;
+}
+
+.home-banner-content h1 {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+}
+
+.home-banner-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+#home-banner-button {
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 8px;
+  width: 200px;
+  background: #18425e;
+  margin: 0 auto;
+}
+
+#home-banner-button a {
+  color: #f7f4e7;
+  font-size: 1.3rem;
+  opacity: 0.8;
+  display: block;
+  padding: 0.7rem 0;
+}
+
+#home-banner-button a:hover {
+  text-decoration: none;
+  color: #fff;
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .home-banner-content h1 {
+    font-size: 2.2rem;
+  }
+  .home-banner-content p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-banner {
+    min-height: 250px;
+    padding: 1rem 0.2rem;
+  }
+  .home-banner-content {
+    padding: 1rem 0.5rem;
+  }
+  .home-banner-content h1 {
+    font-size: 1.4rem;
+  }
+  #home-banner-button {
+    width: 100%;
   }
 }

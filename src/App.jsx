@@ -1,6 +1,7 @@
 import './App.css'
 import Footer from './markup/components/Footer/Footer'
 import Header from './markup/components/Header/Header'
+import Home from './markup/pages/Home'
 
 
 
@@ -14,7 +15,7 @@ function App() {
   return (
     <>
       <Header />
-      <h1 className='text-center'>Test</h1>
+      <Home />
       <Footer />
     </>
   )
