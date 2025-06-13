@@ -40,7 +40,7 @@ function Footer() {
                   <div className="text color-white">
                     Email us : <br />{" "}
                     <a href="mailto:contact.contact@autorex.com">
-                      contact@abegarage.com
+                      support@archer.com
                     </a>
                   </div>
                 </div>

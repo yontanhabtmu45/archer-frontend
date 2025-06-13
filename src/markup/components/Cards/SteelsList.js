@@ -1,7 +1,14 @@
+import steel1 from "../../../assets/Images/steels/steel1.jpg";
+import steel2 from "../../../assets/Images/steels/steel2.jpg";
+import steel3 from "../../../assets/Images/steels/steel3.jpg";
+import steel4 from "../../../assets/Images/steels/steel4.jpg";
+import steel5 from "../../../assets/Images/steels/steel5.jpg";
+
+
 export const steels = [
   {
     name: "A36",
-    img: "../../../assets/Images/steels/steel1.jpg",
+    img: steel1,
     yield: 250,
     ultimate: 400,
     elongation: 18,
@@ -9,7 +16,7 @@ export const steels = [
   },
   {
     name: "A572",
-    img: "../../../assets/Images/steels/steel2.jpg",
+    img: steel2,
     yield: 300,
     ultimate: 500,
     elongation: 20,
@@ -17,7 +24,7 @@ export const steels = [
   },
   {
     name: "A992",
-    img: "../../../assets/Images/steels/steel3.jpg",
+    img: steel3,
     yield: 350,
     ultimate: 550,
     elongation: 22,
@@ -25,7 +32,7 @@ export const steels = [
   },
   {
     name: "A500",
-    img: "../../../assets/Images/steels/steel4.jpg",
+    img: steel4,
     yield: 320,
     ultimate: 480,
     elongation: 19,
@@ -33,7 +40,7 @@ export const steels = [
   },
   {
     name: "A1065",
-    img: "../../../assets/Images/steels/steel5.jpg",
+    img: steel5,
     yield: 400,
     ultimate: 600,
     elongation: 25,
@@ -41,7 +48,7 @@ export const steels = [
   },
   {
     name: "A1085",
-    img: "../../../assets/Images/steels/steel3.jpg",
+    img: steel3,
     yield: 420,
     ultimate: 620,
     elongation: 27,
@@ -49,7 +56,7 @@ export const steels = [
   },
   {
     name: "A1090",
-    img: "../../../assets/Images/steels/steel1.jpg",
+    img: steel1,
     yield: 450,
     ultimate: 650,
     elongation: 30,

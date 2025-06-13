@@ -18,12 +18,7 @@ import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
 
-// Importing icons
-import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
-import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
+
 
 function App() {
   return (

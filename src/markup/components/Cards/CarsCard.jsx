@@ -20,4 +20,12 @@ function CarsCard({ car }) {
   );
 }
 
-export default CarsCard;
+function CarsList({ cars }) {
+  return (
+    <div className="cards-horizontal">
+      {cars.map(car => <CarsCard key={car.id} car={car} />)}
+    </div>
+  );
+}
+
+export default CarsList;
