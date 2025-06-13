@@ -144,6 +144,19 @@
   }
 }
 
+/* steels CSS */
+.main-steels {
+  background-image: url("../../../assets/Images/steels/steel5.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 420px;
+  max-width: 100vw;
+  color: #fff;
+}
+
+
+
 /* contact CSS */
 .main-contact {
   background-image: url("../../../assets/Images/contact/contact1.jpg");
