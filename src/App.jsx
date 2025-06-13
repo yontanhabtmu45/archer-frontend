@@ -8,7 +8,7 @@ import Home from "./markup/pages/Home";
 import Cars from "./markup/pages/Cars";
 import Steels from "./markup/pages/Steels";
 import About from "./markup/pages/About";
-import Contact from "./markup/pages/Contact";
+import Contact from "./markup/pages/Contact"
 import Login from "./markup/pages/Login";
 import Four04 from "./markup/pages/Four04";
 import Admin from "./markup/pages//admin/Admin";

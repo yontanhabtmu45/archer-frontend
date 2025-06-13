@@ -2,6 +2,8 @@ import React from "react";
 import "./styles/custom.css";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { steels } from "../components/Cards/SteelsList";
+import CardsSteel from "../components/Cards/CardsSteel";
 
 function Steels() {
   return (
@@ -19,8 +21,18 @@ function Steels() {
             </div>
           </div>
         </div>
-          <div>
-            <h1>Here</h1>
+          <div className="row main-container-cars">
+            <div className="card-container col-10 m-5">
+              <div className="card-steels mb-3">
+                {
+                  steels.map((steel) => (
+                    <div className="card-steel" key={steel.id}>
+                      <CardsSteel key={steel.id} steel={steel} className="card-info" />
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           </div>
       </div>
     </>
