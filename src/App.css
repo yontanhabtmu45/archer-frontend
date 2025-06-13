@@ -7,18 +7,21 @@
   display: none;
   cursor: pointer;
 }
+
 .desktop-nav {
   display: block;
 }
+
 .mobile-nav-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(174, 173, 173, 0.352);
   z-index: 1000;
 }
+
 .mobile-nav {
   background: #18425e;
   width: 80%;
@@ -30,6 +33,7 @@
   right: 0;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
 }
+
 .close-mobile-menu {
   background: none;
   border: none;
@@ -37,6 +41,7 @@
   float: right;
   cursor: pointer;
 }
+
 .mobile-nav ul {
   list-style: none;
   padding: 0;
@@ -61,7 +66,7 @@
 
 .mobile-nav button,
 .mobile-nav .close-mobile-menu {
-  color: #000;
+  color: #fff;
 }
 
 .mobile-nav a[href="/login"] {
@@ -88,23 +93,31 @@
   justify-content: space-between;
   align-items: center;
 }
+.main_header a:hover {
+  text-decoration: none;
+}
+
 .header_logo {
   display: flex;
   align-items: center;
 }
+
 .header_logo:hover {
   text-decoration: none;
 }
+
 .header_logo img {
   width: 150px;
   height: 100px;
   margin-top: 6px;
   margin-left: 20px;
 }
+
 .header_title h1 {
   color: #f7f4e7;
   line-height: 26px;
 }
+
 .header_title h1:hover {
   text-decoration: none;
   color: #f7f4e7;
@@ -407,7 +420,7 @@
 .home-banner {
   background: url("./assets/template_assets/banner/banner.png") no-repeat center center;
   background-size: cover;
-  min-height: 400px;
+  min-height: 580px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -418,7 +431,7 @@
 }
 
 .home-banner-content {
-  max-width: 700px;
+  width: 700px;
   margin: 0 auto;
   padding: 2rem 1rem;
   background: rgba(24, 66, 94, 0.7);
@@ -490,6 +503,7 @@
   border-radius: 8px;
   background: #F8F3E6;
   width: 100vw;
+  margin-bottom: -2.5rem !important;
 }
 
 .cards {

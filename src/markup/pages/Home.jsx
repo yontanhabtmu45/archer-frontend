@@ -2,7 +2,6 @@ import React from "react";
 import vehicles from "../../assets/template_assets/banner/UI design for vechiels.png";
 import Steels from "../../assets/template_assets/banner/removed steel.png";
 import about from "../../assets/template_assets/banner/about home.png";
-import Suzuki from "../../assets/template_assets/banner/banner1.jpg";
 
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
@@ -25,11 +24,11 @@ function Home() {
           </button>
         </div>
       </section>
-      <section className="featured-products">
-        <div className="container mt-3 ">
+      <section className="featured-products p-4">
+        <div className="container  pb-4">
           <div className="row  cards">
             <div className="col-12 text-center">
-              <h2>Featured Products</h2>
+              <h2 className="pb-5">Featured Products</h2>
             </div>
             <div className="featured-car col-5 mr-5 ">
               <div>
@@ -153,11 +152,6 @@ function Home() {
               </p>
             </div>
             <div className="col-12 col-md-6 choose-us-image">
-              {/* <img
-                src={Suzuki}
-                alt="Choose Us"
-                className="img-fluid"
-              /> */}
             </div>
           </div>
         </div>
