@@ -3,11 +3,7 @@ import vehicles from "../../assets/template_assets/banner/UI design for vechiels
 import Steels from "../../assets/template_assets/banner/removed steel.png";
 import about from "../../assets/template_assets/banner/about home.png";
 
-import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
-import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
+
 
 function Home() {
   return (
