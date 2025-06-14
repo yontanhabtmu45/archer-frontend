@@ -22,8 +22,8 @@ function Steels() {
           </div>
         </div>
           <div className="row main-container-cars">
-            <div className="card-container col-10 m-5">
-              <div className="card-steels mb-3">
+            <div className="card-container m-5">
+              <div className="card-steels  col-10 mb-3">
                 {
                   steels.map((steel) => (
                     <div className="card-steel" key={steel.id}>

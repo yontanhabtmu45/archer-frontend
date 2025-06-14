@@ -3,7 +3,7 @@ import "../../App.css";
 import "./styles/custom.css";
 import { Link } from "react-router-dom";
 import about from "../../assets/template_assets/banner/about home.png";
-import vehicle from "../../assets/Images/vehicles/vehicle2.png"
+import vehicle from "../../assets/Images/vehicles/vehicle2.png";
 
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
@@ -29,29 +29,31 @@ function About() {
           </div>
         </div>
         <div className="col-12 text-center p-2 mt-5 mb-3 ">
-              <h2 className="mb-5 banner-about-header">Welcome to Archer Wholesale</h2>
-              <div className="about-banner-image ">
-              <h5 className="p-5 about-banner-text">
-                Your trusted partner for vehicles and construction steels. We
-                are committed to delivering high-quality products and exceptional
-                service to our customers. With years of experience in the
-                wholesale industry, we understand the needs of our clients and
-                strive to exceed their expectations. Our team is dedicated to
-                providing you with the best products at competitive prices. We
-                take pride in our extensive range of vehicles and construction
-                steels, ensuring that we meet the diverse needs of our clients.
-                Whether you are looking for reliable vehicles or durable
-                construction steels, Archer Wholesale has got you covered. We
-                believe in building long-term relationships with our customers by
-                offering top-notch products and services. Our commitment to
-                quality and customer satisfaction sets us apart in the industry.
-                Thank you for choosing Archer Wholesale as your trusted partner.
-              </h5>
-              <div className="about-banner-image">
-                <img src={vehicle} alt="vehicle" />
-              </div>
-              </div>
+          <h2 className="mb-5 banner-about-header">
+            Welcome to Archer Wholesale
+          </h2>
+          <div className="about-banner-image ">
+            <h5 className="p-5 about-banner-text">
+              Your trusted partner for vehicles and construction steels. We are
+              committed to delivering high-quality products and exceptional
+              service to our customers. With years of experience in the
+              wholesale industry, we understand the needs of our clients and
+              strive to exceed their expectations. Our team is dedicated to
+              providing you with the best products at competitive prices. We
+              take pride in our extensive range of vehicles and construction
+              steels, ensuring that we meet the diverse needs of our clients.
+              Whether you are looking for reliable vehicles or durable
+              construction steels, Archer Wholesale has got you covered. We
+              believe in building long-term relationships with our customers by
+              offering top-notch products and services. Our commitment to
+              quality and customer satisfaction sets us apart in the industry.
+              Thank you for choosing Archer Wholesale as your trusted partner.
+            </h5>
+            <div className="about-banner-image">
+              <img src={vehicle} alt="vehicle" />
             </div>
+          </div>
+        </div>
       </section>
       <section className="about mb-5">
         <div className="container mt-5 ">
@@ -59,7 +61,7 @@ function About() {
             <div className="col-12 text-center pt-4">
               <h2> More About Us</h2>
             </div>
-            
+
             <div className="col-12 col-md-6 pr-5 about-content">
               {/* <p>
                 Archer Wholesale is your premier destination for high-quality
@@ -72,13 +74,13 @@ function About() {
                 satisfaction, we strive to be the leading wholesale provider in
                 the industry. Whether you are looking for reliable vehicles or
                 durable construction steels, Archer Wholesale has got you
-                covered. 
+                covered.
                 {/* Our team is dedicated to delivering exceptional service
                 and building long-term relationships with our customers. */}
                 {/* Thank
                 you for choosing Archer Wholesale as your trusted partner in
                 wholesale solutions. */}
-                 {/* We look forward to serving you with the
+                {/* We look forward to serving you with the
                 highest standards of quality and service. Explore our range of
                 products and discover why Archer Wholesale is the preferred
                 choice for wholesale vehicles and construction steels. Contact
