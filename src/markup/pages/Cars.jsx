@@ -5,7 +5,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import { cars } from "../components/Cards/CarsList";
 import CarsCard from "../components/Cards/CarsCard";
 
+const CAR_PAGE_SIZE = 6;
+
 function Cars() {
+  const [page, setPage] = useState(1);
+
+  const paginatedCars = cars.slice(0, page * CAR_PAGE_SIZE);
+
+  const handleLoadMore = () => setPage(page + 1);
+
   return (
     <>
       <div className="container-fluid main-container-cars">
@@ -29,11 +37,16 @@ function Cars() {
         </div>
         <div className="row main-cars-card">
           <div className="card-container col-10 m-5">
-            {cars.map((car) => (
-              <div className=" card-cars mb-3" key={car.id}>
-                <CarsCard key={car.id} car={car} className="card-info" />
+            {paginatedCars.map((car) => (
+              <div className="card-cars mb-3" key={car.id}>
+                <CarsCard car={car} className="card-info" />
               </div>
             ))}
+            {paginatedCars.length < cars.length && (
+              <button className="load-more-btn" onClick={handleLoadMore}>
+                Load More
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 function CardsSteel({ steel }) {
     return (
         <div className="card text-center">
-            <img src={steel.img} alt={steel.name} />
+            <img src={steel.img} alt={steel.name} loading="lazy" />
             <h3>{steel.name}</h3>
             <p>
                 Yield: <em>{steel.yield}</em> MPa
