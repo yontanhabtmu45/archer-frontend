@@ -8,7 +8,7 @@ import CardsSteel from "../components/Cards/CardsSteel";
 function Steels() {
   return (
     <>
-      <div className="container-fluid main-container-steels">
+      <div className="container main-container-steels">
         <div className="row main-steels ">
           <div className="col-md-12 banner-cars">
             <h1 className="banner-title">Steels</h1>

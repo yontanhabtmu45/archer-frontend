@@ -16,7 +16,7 @@ function Cars() {
 
   return (
     <>
-      <div className="container-fluid main-container-cars">
+      <div className="container-fluid main-container-cars ">
         <div className="row main-cars ">
           <div className="col-md-12 banner-cars">
             <h1 className="banner-title">Cars</h1>

@@ -1,12 +1,18 @@
 /* cars CSS */
+.main-container-cars {
+  /* max-width: 100%; */
+}
+
 .main-cars {
+  height: 420px;
+  min-width: 100vw;
   background-image: url("../../../assets/Images/vehicles/vehicle5.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 420px;
-  max-width: 100vw;
   color: #fff;
+  margin: 0;
+  padding: 0;
 }
 .banner-cars {
   padding: 6rem 5rem 4rem;
@@ -72,7 +78,8 @@
 .card {
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(24,66,94,0.10), 0 1.5px 6px rgba(24,66,94,0.08);
+  box-shadow: 0 4px 24px rgba(24, 66, 94, 0.1),
+    0 1.5px 6px rgba(24, 66, 94, 0.08);
   padding: 2rem 1.2rem 1.5rem 1.2rem;
   margin: 1.2rem;
   display: flex;
@@ -87,7 +94,8 @@
 }
 
 .card:hover {
-  box-shadow: 0 8px 32px rgba(24,66,94,0.16), 0 2px 12px rgba(24,66,94,0.10);
+  box-shadow: 0 8px 32px rgba(24, 66, 94, 0.16),
+    0 2px 12px rgba(24, 66, 94, 0.1);
   transform: translateY(-4px) scale(1.025);
 }
 
@@ -98,7 +106,7 @@
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 1.2rem;
-  box-shadow: 0 2px 8px rgba(24,66,94,0.08);
+  box-shadow: 0 2px 8px rgba(24, 66, 94, 0.08);
   background: #f7f4e7;
 }
 
@@ -131,7 +139,7 @@
   margin-left: 0.3rem;
 }
 
-.card-container{
+.card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
@@ -162,14 +170,16 @@
   align-items: center;
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(24,66,94,0.10), 0 1.5px 6px rgba(24,66,94,0.08);
+  box-shadow: 0 4px 24px rgba(24, 66, 94, 0.1),
+    0 1.5px 6px rgba(24, 66, 94, 0.08);
   padding: 2rem 1.2rem 1.5rem 1.2rem;
   transition: box-shadow 0.2s, transform 0.18s;
   position: relative;
 }
 
 .card-steels .card:hover {
-  box-shadow: 0 8px 32px rgba(24,66,94,0.16), 0 2px 12px rgba(24,66,94,0.10);
+  box-shadow: 0 8px 32px rgba(24, 66, 94, 0.16),
+    0 2px 12px rgba(24, 66, 94, 0.1);
   transform: translateY(-4px) scale(1.025);
 }
 
@@ -180,7 +190,7 @@
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 1.2rem;
-  box-shadow: 0 2px 8px rgba(24,66,94,0.08);
+  box-shadow: 0 2px 8px rgba(24, 66, 94, 0.08);
   background: #f7f4e7;
 }
 
@@ -241,8 +251,6 @@
   color: #fff;
 }
 
-
-
 /* about us CSS */
 
 .main-container-about {
@@ -272,7 +280,6 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(24, 66, 94, 0.08);
 }
-
 
 /* contact CSS */
 .main-contact {
