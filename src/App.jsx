@@ -11,9 +11,10 @@ import About from "./markup/pages/About";
 import Contact from "./markup/pages/Contact"
 import Login from "./markup/pages/Login";
 import Four04 from "./markup/pages/Four04";
-import Admin from "./markup/pages/admin/Admin";
+// import Admin from "./markup/pages/admin/Admin";
 import Dashboard from "./markup/pages/admin/Dashboard";
-import AdminMenu from "./markup/components/Admin/AdminMenu/AdminMenu";
+import Unauthorized from "./markup/pages/Unauthorized"
+
 
 // Importing CSS files for styling
 import "./assets/template_assets/css/bootstrap.css";
@@ -34,8 +35,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/Login" element={<Login />} />
           <Route path="*" element={<Four04 />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/dashboard" element={<AdminMenu />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/admin" element={<Dashboard />} />
         </Routes>
       <Footer />
     </>
