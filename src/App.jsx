@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import "./assets/template_assets/style/custom.css"
 import Footer from "./markup/components/Footer/Footer";
 import Header from "./markup/components/Header/Header";
 
@@ -11,9 +12,11 @@ import About from "./markup/pages/About";
 import Contact from "./markup/pages/Contact"
 import Login from "./markup/pages/Login";
 import Four04 from "./markup/pages/Four04";
-// import Admin from "./markup/pages/admin/Admin";
 import Dashboard from "./markup/pages/admin/Dashboard";
 import Unauthorized from "./markup/pages/Unauthorized"
+import AddAdmin from "./markup/pages/admin/AddAdmin";
+import AddVehicle from "./markup/pages/admin/AddVehicle";
+import AddSteel from "./markup/pages/admin/AddSteel";
 
 
 // Importing CSS files for styling
@@ -37,6 +40,9 @@ function App() {
           <Route path="*" element={<Four04 />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/add-admin" element={<AddAdmin />} />
+          <Route path="/admin/add-vehicle" element={<AddVehicle />} />
+          <Route path="/admin/add-steel" element={<AddSteel />} />
         </Routes>
       <Footer />
     </>

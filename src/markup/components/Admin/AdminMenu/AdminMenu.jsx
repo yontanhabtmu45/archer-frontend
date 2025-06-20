@@ -9,8 +9,8 @@ function AdminMenu() {
       </div>
       <div className="list-group">
         <Link to="/admin" className="list-group-item">Dashboard</Link>
-        <Link to="/admin/Vehicles" className="list-group-item">Vehicles</Link>
-        <Link to="/admin/Vehicle" className="list-group-item">New Vehicles</Link>
+        <Link to="/admin/vehicles" className="list-group-item">Vehicles</Link>
+        <Link to="/admin/add-vehicle" className="list-group-item">New Vehicles</Link>
         <Link to="/admin/add-admin" className="list-group-item">Add admin</Link>
         <Link to="/admin/admins" className="list-group-item">Admins</Link>
         <Link to="/admin/add-steel" className="list-group-item">Add steels</Link>
