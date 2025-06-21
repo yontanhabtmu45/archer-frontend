@@ -4,7 +4,7 @@ import  AddSteelForm from '../../components/Admin/AddSteelForm/AddSteelForm'
 // Import the AdminMenu component 
 import AdminMenu from '../../components/Admin/AdminMenu/AdminMenu';
 
-function AddSteel(props) {
+function AddSteel() {
   return (
     <div>
       <div className="container-fluid admin-pages">

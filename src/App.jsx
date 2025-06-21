@@ -17,6 +17,9 @@ import Unauthorized from "./markup/pages/Unauthorized"
 import AddAdmin from "./markup/pages/admin/AddAdmin";
 import AddVehicle from "./markup/pages/admin/AddVehicle";
 import AddSteel from "./markup/pages/admin/AddSteel";
+import AdminsList from "./markup/components/Admin/AdminsList/AdminsList";
+import VehiclesList from "./markup/components/Admin/VehicleList/VehicleList";
+import SteelsList from "./markup/components/Admin/SteelList/SteelList";
 
 
 // Importing CSS files for styling
@@ -43,6 +46,9 @@ function App() {
           <Route path="/admin/add-admin" element={<AddAdmin />} />
           <Route path="/admin/add-vehicle" element={<AddVehicle />} />
           <Route path="/admin/add-steel" element={<AddSteel />} />
+          <Route path="/admin/admins" element={<AdminsList />} />
+          <Route path="/admin/vehicles" element={<VehiclesList />} />
+          <Route path="/admin/steels" element={<SteelsList />} />
         </Routes>
       <Footer />
     </>

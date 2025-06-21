@@ -1,5 +1,6 @@
 // Import from the env 
-const api_url = process.env.REACT_APP_API_URL;
+// const api_url = process.env.REACT_APP_API_URL;
+const api_url = 'http://localhost:2716';
 
 // A function to send post request to create a new steel
 const createSteel = async (formData) => {

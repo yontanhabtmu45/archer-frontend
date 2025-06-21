@@ -56,11 +56,11 @@ function AddVehicleForm() {
       return;
     }
 
-    function cleanFormData(obj) {
-  return Object.fromEntries(
-    Object.entries(obj).map(([k, v]) => [k, v === undefined ? null : v])
-  );
-}
+//     function cleanFormData(obj) {
+//   return Object.fromEntries(
+//     Object.entries(obj).map(([k, v]) => [k, v === undefined ? null : v])
+//   );
+// }
 
     const formData = {
       vehicle_image,
@@ -76,8 +76,8 @@ function AddVehicleForm() {
     };
 
     // Pass the form data to the service
-    const newAdmin = vehicleService.createVehicle(formData);
-    newAdmin
+    const newVehicle = vehicleService.createVehicle(formData);
+    newVehicle
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

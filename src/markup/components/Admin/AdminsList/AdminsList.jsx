@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, Button } from "react-bootstrap";
 // Import the auth hook
-import { useAuth } from "../../../../Contexts/AuthContext";
+import { useAuth } from "../../../../Context/AuthContext";
 // Import the date-fns library
 import { format } from "date-fns";
 // Import the getAllAdmins function
@@ -68,9 +68,9 @@ function AdminsList() {
           <section className="contact-section">
             <div className="auto-container">
               <div className="contact-title">
-                <h2>Employees</h2>
+                <h2>Admins</h2>
                 <div className="text">
-                  Here you can see all the employees of the company. You can
+                  Here you can see all the admins of the company. You can
                   edit or delete any employee from this list.
                 </div>
               </div>
@@ -88,20 +88,20 @@ function AdminsList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {employees.map((employee) => (
-                    <tr key={employee.employee_id}>
-                      <td>{employee.active_employee ? "Yes" : "No"}</td>
-                      <td>{employee.employee_first_name}</td>
-                      <td>{employee.employee_last_name}</td>
-                      <td>{employee.employee_email}</td>
-                      <td>{employee.employee_phone}</td>
+                  {admins.map((admin) => (
+                    <tr key={admin.admin_id}>
+                      <td>{admin.active_admin ? "Yes" : "No"}</td>
+                      <td>{admin.admin_first_name}</td>
+                      <td>{admin.admin_last_name}</td>
+                      <td>{admin.admin_email}</td>
+                      <td>{admin.admin_phone}</td>
                       <td>
                         {format(
-                          new Date(employee.added_date),
+                          new Date(admin.added_date),
                           "MM - dd - yyyy | kk:mm"
                         )}
                       </td>
-                      <td>{employee.company_role_name}</td>
+                      <td>{admin.company_role_name}</td>
                       <td>
                         <div className="edit-delete-icons">edit | delete</div>
                       </td>
