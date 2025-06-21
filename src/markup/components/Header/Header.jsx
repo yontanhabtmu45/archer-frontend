@@ -1,11 +1,25 @@
 import React, {useState} from "react";
 import Logo from "../../../assets/Natty Logo.png";
 import icon from "../../../assets/template_assets/icons/icon-bar.png";
+// Import the login service to access the logout function
+import { logOut as logOutService } from "../../../services/login.service.jsx";// Import the custom context hook
+import { useAuth } from "../../../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 function Header() {
+  // Use the custom hook to access the data in the context
+    const { isLogged, setIsLogged, admin } = useAuth();
 
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // Log out event handler function
+      const logOut = () => {
+        // Call the logout function from the login service
+        logOutService();
+        // Set the isLogged state to false
+        setIsLogged(false);
+      };
 
     // handle mobile menu toggle
     const handleMobileMenuToggle = () => {
@@ -46,7 +60,22 @@ function Header() {
               <li><a href="/Admin">Admin</a></li>
             </ul>
           <button className="p-2 pl-4 pr-4 m-3">
-            <a href="/login">Login</a>
+          {isLogged ? (
+                  <div>
+                    <Link
+                      to="/"
+                      onClick={logOut}
+                    >
+                      Log out
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="link-btn">
+                    <Link to="/login" >
+                      Login
+                    </Link>
+                  </div>
+                )}
           </button>
           </nav>
           {/* Mobile Menu Button */}

@@ -26,6 +26,7 @@ import SteelsList from "./markup/components/Admin/SteelList/SteelList";
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
+import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
 
 
 
@@ -42,13 +43,35 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="*" element={<Four04 />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/add-admin" element={<AddAdmin />} />
-          <Route path="/admin/add-vehicle" element={<AddVehicle />} />
-          <Route path="/admin/add-steel" element={<AddSteel />} />
+          {/* <Route path="/admin" element={<Dashboard />} /> */}
+          {/* // Add the Dashboard Route  */}
+        <Route path="/admin"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <Dashboard />
+            </PrivateAuthRoute>
+          } />
+          {/* add the AddAdmin Route */}
           <Route path="/admin/admins" element={<AdminsList />} />
+          <Route path="/admin/add-admin" element={
+            <PrivateAuthRoute roles={[3]}>
+              <AddAdmin />
+            </PrivateAuthRoute>
+          } />
+          {/* add the AddVehicle Route */}
           <Route path="/admin/vehicles" element={<VehiclesList />} />
+          <Route path="/admin/add-vehicle" element={
+            <PrivateAuthRoute roles={[3]}>
+              <AddVehicle />
+            </PrivateAuthRoute>
+          }/>
+          {/* add the AddSteel Route */}
           <Route path="/admin/steels" element={<SteelsList />} />
+          <Route path="/admin/add-steel" element={
+            <PrivateAuthRoute roles={[3]}>
+              <AddSteel />
+            </PrivateAuthRoute>
+          } />
         </Routes>
       <Footer />
     </>
