@@ -134,6 +134,11 @@ function AddVehicleForm() {
                         placeholder="vehicle Image"
                         required
                       />
+                      { imageRequired && (
+                        <div className="validation-error" role="alert">
+                          {imageRequired}
+                        </div>
+                      )}
                     </div>
                     <div className="form-group col-md-12">
                       <input

@@ -9,6 +9,7 @@
 .admin-menu {
   background: #1e2331;
   padding: 10px 20px;
+  margin-bottom: auto;
 }
 .admin-left-side .list-group-item.active {
   z-index: 2;
@@ -41,4 +42,30 @@
 }
 .admin-left-side a:hover {
   color: #fff;
+}
+.validation-error{
+  color: red;
+  float: right;
+  font-style: italic;
+}
+select.custom-select-box {
+  border-right: 25px solid #dddddd;
+}
+
+input:disabled {
+  background-color: #ecedef !important;
+}
+.checkbox-in-form .form-check-label {
+  padding-left: 15px;
+  font-size: 1.3em;
+  font-weight: 300;
+  vertical-align: super;
+}
+.checkbox-in-form input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+.form-bold-header {
+  font-weight: 600;
+  font-size: 1.5em;
 }

@@ -23,9 +23,46 @@ const getAllAdmins = async (token) => {
   return response;
 }
 
+// a function to send get request to get a single Admin
+const getAdmin = async (token, id) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json',
+      'x-access-token': token }
+    };
+    const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
+    return response;
+}
+
+// a function to delete an admin
+const deleteAdmin = async (id, token) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json',
+      'x-access-token': token }
+  };
+  const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
+  return response;
+}
+
+// a function to update an admin
+const updateAdmin = async (id, formData, token) =>{
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json',
+      'x-access-token': token },
+      body: JSON.stringify(formData)
+      };
+      const response = await fetch(`${api_url}/api/admin/edit/${id}`, requestOptions);
+      return response;
+}
+
 // Export all the functions 
 const AdminService = {
   createAdmin,
-  getAllAdmins
+  getAllAdmins,
+  getAdmin,
+  deleteAdmin,
+  updateAdmin
 }
 export default AdminService; 

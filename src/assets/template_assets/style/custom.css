@@ -38,7 +38,7 @@ input::placeholder, textarea::placeholder {
   border-bottom: 1px solid #dfe2ec;
 }
 .admin-menu {
-  background: #1e2331;
+  background: #1a202e;
   padding: 10px 20px;
 }
 .admin-left-side .list-group-item.active {
@@ -62,7 +62,7 @@ input::placeholder, textarea::placeholder {
   padding: 0;
 }
 .admin-left-side .list-group-item {
-  background-color: #222b48;
+  background-color: #18425e;
   border-bottom: 1px solid #616675;
   margin-bottom: 0px;
   color: #fff;

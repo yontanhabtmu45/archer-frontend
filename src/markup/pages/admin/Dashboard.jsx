@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
 import AdminMenu from "../../components/Admin/AdminMenu/AdminMenu";
+// import { FaWarehouse } from "react-icons/fa"; // Example icon
+
 
 function Dashboard() {
   return (
     <section className="main-cars">
-      <div className="container-fluid admin-pages">
+      <div className="container-fluid px-2 admin-pages">
         <div className="row">
           <div className="col-md-3 admin-left-side">
             <AdminMenu />
@@ -19,14 +21,24 @@ function Dashboard() {
                   aspects of the application.
                 </p>
                 <div className="admin-links">
-                  <Link to="/admin/orders" className="btn btn-primary">
+                  <Link to="/admin/vehicles" className="btn btn-primary">
                     Manage Vehicles
                   </Link>
-                  <Link to="/admin/customers" className="btn btn-success">
+                  <Link to="/admin/steels" className="btn btn-success">
+                  {/* <span className="dashboard-icon"><FaWarehouse /></span> */}
                     Manage Steels
                   </Link>
-                  <Link to="/admin/employees" className="btn btn-secondary">
+                  <Link to="/admin/admins" className="btn btn-secondary">
                     Manage Admins
+                  </Link>
+                  <Link to="/admin/add-vehicle" className="btn btn-success">
+                    add Vehicle
+                  </Link>
+                  <Link to="/admin/add-steel" className="btn btn-primary">
+                    Add Steel
+                  </Link>
+                  <Link to="/admin/add-admin" className="btn btn-secondary">
+                    Add Admin
                   </Link>
                 </div>
               </div>

@@ -1,32 +1,65 @@
-// Import from the env 
+// Import from the env
 // const api_url = process.env.REACT_APP_API_URL;
-const api_url = 'http://localhost:2716';
+const api_url = "http://localhost:2716";
 
 // A function to send post request to create a new steel
 const createSteel = async (formData) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      };
-      const response = await fetch(`${api_url}/api/steel`, requestOptions);
-      return response;
-}
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  };
+  const response = await fetch(`${api_url}/api/steel`, requestOptions);
+  return response;
+};
 
 // A function to send get request to get all steel
 const getAllSteels = async (token) => {
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 
-      'x-access-token': token }
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-access-token": token },
   };
   const response = await fetch(`${api_url}/api/steels`, requestOptions);
   return response;
+};
+
+// a function to send get request to get a steel by id
+const getSteelById = async (token, id) => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-access-token": token },
+  };
+  const response = await fetch(`${api_url}/api/steel/${id}`, requestOptions);
+  return response;
+};
+
+// a function to send put request to update a steel
+const updateSteel = async (token, id, formData) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", "x-access-token": token },
+    body: JSON.stringify(formData)
+  };
+  const response = await fetch(`${api_url}/api/steel/${id}`, requestOptions);
+    return response;
 }
 
-// Export all the functions 
+// a function to send delete request to delete a steel
+const deleteSteel = async (token, id) => {
+  const requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json", "x-access-token": token },
+    };
+    const response = await fetch(`${api_url}/api/steel/${id}`, requestOptions);
+    return response;
+}
+
+// Export all the functions
 const steelService = {
   createSteel,
-  getAllSteels
-}
+  getAllSteels,
+  getSteelById,
+  updateSteel,
+  deleteSteel
+};
 export default steelService;

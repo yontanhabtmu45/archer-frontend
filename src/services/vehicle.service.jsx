@@ -25,9 +25,52 @@ const getAllVehicles = async (token) => {
   return response;
 }
 
+// Get vehicle by ID
+const getVehicle = async (id, token) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    }
+  };
+  const response = await fetch(`${api_url}/api/vehicles/${id}`, requestOptions);
+  return response.json();
+};
+
+// Update vehicle by ID
+const updateVehicle = async (id, vehicleData, token) => {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    },
+    body: JSON.stringify(vehicleData)
+  };
+  const response = await fetch(`${api_url}/api/vehicles/${id}`, requestOptions);
+  return response.json();
+};
+
+// Delete vehicle by ID
+const deleteVehicle = async (id, token) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    }
+  };
+  const response = await fetch(`${api_url}/api/vehicles/${id}`, requestOptions);
+  return response.json();
+};
+
 // Export all the functions 
 const VehicleService = {
   createVehicle,
-  getAllVehicles
+  getAllVehicles,
+  getVehicle,
+  updateVehicle,
+  deleteVehicle
 }
 export default VehicleService;

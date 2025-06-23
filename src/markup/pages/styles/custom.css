@@ -564,3 +564,144 @@
 .load-more-btn:hover {
   background: #2e5c8a;
 }
+
+
+
+/* Admin Dashboard Enhanced Styles */
+.admin-dashboard {
+  color: #12314a;
+  padding: 2rem;
+  background: linear-gradient(120deg, #e3eafc 60%, #f7f4e7 100%);
+  /* height: auto; */
+  box-sizing: border-box;
+}
+
+.admin-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  margin-top: 2rem;
+  box-sizing: border-box;
+}
+
+.admin-links a,
+.admin-links .dashboard-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  height: 90px;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(24, 66, 94, 0.08);
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #18425e;
+  text-decoration: none;
+  transition: box-shadow 0.18s, transform 0.15s, background 0.18s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.admin-links a::before,
+.admin-links .dashboard-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, #18425e 60%, #2e5c8a 100%);
+  border-radius: 16px 0 0 16px;
+  transition: width 0.2s;
+}
+
+.admin-links a:hover,
+.admin-links a:focus,
+.admin-links .dashboard-link:hover,
+.admin-links .dashboard-link:focus {
+  background: linear-gradient(90deg, #e3eafc 80%, #f7f4e7 100%);
+  box-shadow: 0 6px 24px rgba(24, 66, 94, 0.16);
+  transform: translateY(-2px) scale(1.025);
+  color: #2e5c8a;
+}
+
+.admin-links a:hover::before,
+.admin-links a:focus::before,
+.admin-links .dashboard-link:hover::before,
+.admin-links .dashboard-link:focus::before {
+  width: 100%;
+  background: linear-gradient(90deg, #18425e 60%, #2e5c8a 100%);
+  opacity: 0.08;
+}
+
+.admin-links a .dashboard-icon,
+.admin-links .dashboard-link .dashboard-icon {
+  font-size: 2rem;
+  color: #2e5c8a;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.admin-links a:hover .dashboard-icon,
+.admin-links .dashboard-link:hover .dashboard-icon {
+  color: #18425e;
+}
+
+@media (max-width: 700px) {
+  .admin-links {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    height: 100%;
+  }
+  .admin-links a,
+  .admin-links .dashboard-link {
+    padding: 1.2rem 1rem;
+    font-size: 1.05rem;
+    height: 70px;
+  }
+}
+
+.services-section {
+  background: #fafafa;
+}
+.edit-delete-icons {
+  cursor: pointer;
+  
+}
+.edit a {
+  color: #0a1436;
+  padding: 0 10px;
+}
+.edit a:hover {
+  text-decoration: none;
+  color: #0a1436;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .admin-dashboard {
+    padding: 1.2rem;
+  }
+  .admin-links {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard {
+    padding: 0.2rem;
+    height: 100%;
+  }
+  .admin-links a,
+  .admin-links .dashboard-link {
+    font-size: 0.98rem;
+    padding: 0.7rem 0.4rem;
+    height: 56px;
+  }
+}

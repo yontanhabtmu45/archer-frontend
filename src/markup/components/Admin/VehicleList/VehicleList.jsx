@@ -26,7 +26,7 @@ function VehicleList() {
 
       useEffect(() =>{
         //  function to get all admins
-        const allVehicle = vehicleService.getAllVehicle(token);
+        const allVehicle = vehicleService.getAllVehicles(token);
         allVehicle
         .then((res) => {
             if (!res.ok) {
@@ -52,6 +52,22 @@ function VehicleList() {
           });
       }, [])
 
+
+      const handleDeleteVehicle = async (vehicleId) => {
+        if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
+        try {
+          const response = await vehicleService.deleteVehicle(vehicleId, admin?.admin_token);
+          if (response.status === "success") {
+            setVehicles((prev) => prev.filter((v) => v.id !== vehicleId));
+          } else {
+            setApiError(true);
+            setApiErrorMessage(response.message || "Failed to delete vehicle.");
+          }
+        } catch (err) {
+          setApiError(true);
+          setApiErrorMessage("An error occurred while deleting the vehicle.");
+        }
+      };
 
 
   return (
@@ -111,8 +127,22 @@ function VehicleList() {
                             )}
                           </td>
                           <td>
-                            <div className="edit-delete-icons">edit | delete</div>
-                          </td>
+                        <div className="edit-delete-icons d-flex justify-center align-center">
+                          <div className="edit">
+                            <Link
+                              to={`/vehicle/edit/${vehicle.id}`}
+                            >
+                              <EditOutlinedIcon /> |
+                            </Link>
+                          </div>
+                          <div
+                            className="delete"
+                            onClick={() => handleDeleteVehicle(vehicle.id)}
+                          >
+                            <DeleteOutlineOutlinedIcon />
+                          </div>
+                        </div>
+                      </td>
                         </tr>
                       ))}
                     </tbody>
