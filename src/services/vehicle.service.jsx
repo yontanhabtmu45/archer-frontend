@@ -48,7 +48,7 @@ const updateVehicle = async (id, vehicleData, token) => {
     },
     body: JSON.stringify(vehicleData)
   };
-  const response = await fetch(`${api_url}/api/vehicles/${id}`, requestOptions);
+  const response = await fetch(`${api_url}/api/vehicle/${id}`, requestOptions);
   return response.json();
 };
 

@@ -12,19 +12,22 @@ function EditAdmin() {
 
   useEffect(() => {
     if (!id) {
-        setError('Invalid admin ID.');
-        setLoading(false);
-        return;
-      }
+      setError('Invalid admin ID.');
+      setLoading(false);
+      return;
+    }
+  
     const fetchAdmin = async () => {
+      setLoading(true);
+      setError('');
       try {
-        setLoading(true);
-        setError('');
         const response = await adminService.getAdmin(id);
-        if (response.status === 'success') {
-          setAdmin(response.data);
+        // If using fetch, you may need to parse JSON: const data = await response.json();
+        if (response && (response.status === 'success' || response.ok)) {
+          // If using fetch, use response.data or response directly
+          setAdmin(response.data || response);
         } else {
-          setError(response.message || 'Failed to fetch admin.');
+          setError((response && response.message) || 'Failed to fetch admin.');
         }
       } catch (err) {
         setError('Error fetching admin.');
@@ -32,6 +35,7 @@ function EditAdmin() {
         setLoading(false);
       }
     };
+  
     fetchAdmin();
   }, [id]);
 

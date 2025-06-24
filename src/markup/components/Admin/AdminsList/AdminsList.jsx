@@ -23,7 +23,7 @@ function AdminsList() {
   const [apiErrorMessage, setApiErrorMessage] = useState(null);
   // To get the logged in admin token
   const { admin } = useAuth();
-  let token = null; // To store the token
+  let token = ""; // To store the token
   if (admin) {
     token = admin.admin_token;
   }
@@ -73,20 +73,6 @@ function AdminsList() {
       alert("An error occurred while deleting the admin.");
     }
   };
-  // a function for edit
-  // const handleEdit = async (id) => {
-  //   // Call the getAdmin function from the adminService
-  //   const response = await adminService.getAdmin(id, token);
-  //   if (response.status === 200) {
-  //     // If the response status is 200, then the admin has been retrieved successfully
-  //     // Redirect the user to the edit admin page
-  //     window.location.href = `/admin/edit-admin/${id}`;
-  //   } else {
-  //     // If the response status is not 200, then there is an error
-  //     setApiError(true);
-  //     setApiErrorMessage(response.data.message);
-  //   }
-  // };
 
   return (
     <>

@@ -15,16 +15,13 @@ export const AuthProvider = ({ children }) => {
     // Retrieve the logged in user from local storage
     const loggedInAdmin = getAuth();
     // console.log(loggedInAdmin);
-    loggedInAdmin.then((response) => {
-      // console.log(response);
-      if (response.admin_token) {
-        setIsLogged(true);
-        // 3 is the admin_role for admin
-        if (response.admin_role === 3) {
-          setIsAdmin(true);
-        }
+    if (loggedInAdmin.admin_token) {
+      setIsLogged(true);
+      // 3 is the admin_role for admin
+      if (loggedInAdmin.admin_role === 3) {
+        setIsAdmin(true);
       }
-    });
+    }
   }, []);
   return (
     <AuthContext.Provider value={value}>

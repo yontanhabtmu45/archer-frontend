@@ -73,8 +73,8 @@ function AddSteelForm() {
           // Redirect to the vehicle page after 2 seconds
           // For now, just redirect to the home page
           setTimeout(() => {
-            // window.location.href = '/admin/vehicle';
-            window.location.href = "/admin"; // Redirect to the vehicles page
+            // window.location.href = '/admin/steel';
+            window.location.href = "/admin/steels"; // Redirect to the vehicles page
           }, 2000);
         }
       })
@@ -93,109 +93,70 @@ function AddSteelForm() {
   };
 
   return (
-    <section className="contact-section">
-      <div className="auto-container">
-        <div className="contact-title">
-          <h2>Add a new vehicle</h2>
-        </div>
-        <div className="row clearfix">
-          <div className="form-column col-lg-7">
-            <div className="inner-column">
-              <div className="contact-form">
-                <form onSubmit={handleSubmit}>
-                  <div className="row clearfix">
-                    <div className="form-group col-md-12">
-                      {serverError && (
-                        <div className="validation-error" role="alert">
-                          {serverError}
-                        </div>
-                      )}
-                      <input
-                        type="file"
-                        name="steel_image"
-                        value={steel_image}
-                        onChange={(event) => setImage(event.target.value)}
-                        placeholder="steel Image"
-                        required
-                      />
-                      {imageRequired && (
-                        <div className="validation-error" role="alert">
-                          {imageRequired}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="steel_type"
-                        value={steel_type}
-                        onChange={(event) => setType(event.target.value)}
-                        placeholder="steel Type"
-                        required
-                      />
-                      { typeRequired && (
-                        <div className="validation-error" role="alert">
-                          {typeRequired}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="steel_weight"
-                        value={steel_weight}
-                        onChange={(event) => setWeight(event.target.value)}
-                        placeholder="steel weight"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="number"
-                        name="steel_price_per_ton"
-                        value={steel_price_per_ton}
-                        onChange={(event) => setPricePerTon(event.target.value)}
-                        placeholder="steel price per ton in Birr"
-                        required
-                      />
-                      { PriceRequired && (
-                        <div className="validation-error" role="alert">
-                          {PriceRequired}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="number"
-                        name="steel_total_price"
-                        value={steel_total_price}
-                        onChange={(event) => setTotalPrice(event.target.value)}
-                        placeholder="steel total price"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <button
-                        className="theme-btn btn-style-one"
-                        type="submit"
-                        data-loading-text="Please wait..."
-                      >
-                        <span>Add steel</span>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+    <form className="add-steel-form p-4 rounded shadow-sm bg-white" onSubmit={handleSubmit} style={{ maxWidth: 500, margin: "0 auto" }}>
+      <h3 className="mb-3 text-primary fw-bold">Add New Steel</h3>
+      <div className="mb-3">
+  <label className="form-label fw-semibold">Image <span className="text-danger">*</span></label>
+  <input
+    type="file"
+    className={`form-control ${imageRequired ? "is-invalid" : ""}`}
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files[0];
+      setImage(file);
+      setImageRequired(false);
+    }}
+  />
+  {imageRequired && <div className="invalid-feedback">Image is required.</div>}
+</div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Type <span className="text-danger">*</span></label>
+        <input
+          type="text"
+          className={`form-control ${typeRequired ? "is-invalid" : ""}`}
+          value={steel_type}
+          onChange={(e) => { setType(e.target.value); setTypeRequired(false); }}
+          placeholder="Enter steel type"
+        />
+        {typeRequired && <div className="invalid-feedback">Type is required.</div>}
       </div>
-    </section>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Weight (tons)</label>
+        <input
+          type="number"
+          className="form-control"
+          value={steel_weight}
+          onChange={(e) => setWeight(e.target.value)}
+          placeholder="Enter weight"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Price per Ton <span className="text-danger">*</span></label>
+        <input
+          type="number"
+          className={`form-control ${PriceRequired ? "is-invalid" : ""}`}
+          value={steel_price_per_ton}
+          onChange={(e) => { setPricePerTon(e.target.value); setPriceRequired(false); }}
+          placeholder="Enter price per ton"
+        />
+        {PriceRequired && <div className="invalid-feedback">Price per ton is required.</div>}
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Total Price</label>
+        <input
+          type="number"
+          className="form-control"
+          value={steel_total_price}
+          onChange={(e) => setTotalPrice(e.target.value)}
+          placeholder="Enter total price"
+        />
+      </div>
+      {success && <div className="alert alert-success">Steel added successfully!</div>}
+      {serverError && <div className="alert alert-danger">{serverError}</div>}
+      <button type="submit" className="btn btn-primary w-100 fw-bold py-2 mt-2">
+        Add Steel
+      </button>
+    </form>
   )
 }
 

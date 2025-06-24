@@ -4,15 +4,15 @@ import vehicleService from "../../../../services/vehicle.service";
 
 function AddVehicleForm() {
   const [vehicle_image, setImage] = useState("");
-  const [vehicle_Year, setYear] = useState("");
-  const [vehicle_Make, setMake] = useState("");
-  const [vehicle_Model, setModel] = useState("");
-  const [vehicle_Type, setType] = useState("");
-  const [vehicle_Mileage, setMileage] = useState("");
-  const [vehicle_Tag, setTag] = useState("");
-  const [vehicle_Serial, setSerial] = useState("");
-  const [vehicle_Color, setColor] = useState("");
-  const [vehicle_Total_Price, setTotalPrice] = useState("");
+  const [vehicle_year, setYear] = useState("");
+  const [vehicle_make, setMake] = useState("");
+  const [vehicle_model, setModel] = useState("");
+  const [vehicle_type, setType] = useState("");
+  const [vehicle_mileage, setMileage] = useState("");
+  const [vehicle_tag, setTag] = useState("");
+  const [vehicle_serial, setSerial] = useState("");
+  const [vehicle_color, setColor] = useState("");
+  const [vehicle_total_price, setTotalPrice] = useState("");
 
   // ERRORS
   const [imageRequired, setImageRequired] = useState("");
@@ -36,7 +36,7 @@ function AddVehicleForm() {
     }
 
     // Model is required
-    if (!vehicle_Model) {
+    if (!vehicle_model) {
       setModelRequired("vehicle Model is required");
       valid = false;
     } else {
@@ -44,7 +44,7 @@ function AddVehicleForm() {
     }
 
     // Price is required
-    if (!vehicle_Total_Price) {
+    if (!vehicle_total_price) {
       setTotalPriceRequired("vehicle Model is required");
       valid = false;
     } else {
@@ -56,23 +56,17 @@ function AddVehicleForm() {
       return;
     }
 
-//     function cleanFormData(obj) {
-//   return Object.fromEntries(
-//     Object.entries(obj).map(([k, v]) => [k, v === undefined ? null : v])
-//   );
-// }
-
     const formData = {
       vehicle_image,
-      vehicle_make: vehicle_Make,
-      vehicle_model: vehicle_Model,
-      vehicle_year: vehicle_Year,
-      vehicle_type: vehicle_Type,
-      vehicle_mileage: vehicle_Mileage,
-      vehicle_tag: vehicle_Tag,
-      vehicle_serial: vehicle_Serial,
-      vehicle_color: vehicle_Color,
-      vehicle_total_price: vehicle_Total_Price,
+      vehicle_make,
+      vehicle_model,
+      vehicle_year,
+      vehicle_type,
+      vehicle_mileage,
+      vehicle_tag,
+      vehicle_serial,
+      vehicle_color,
+      vehicle_total_price,
     };
 
     // Pass the form data to the service
@@ -92,7 +86,7 @@ function AddVehicleForm() {
           // For now, just redirect to the home page
           setTimeout(() => {
             // window.location.href = '/admin/vehicle';
-            window.location.href = "/admin"; // Redirect to the vehicles page
+            window.location.href = "/admin/vehicles"; // Redirect to the vehicles page
           }, 2000);
         }
       })
@@ -109,162 +103,146 @@ function AddVehicleForm() {
   };
 
   return (
-    <section className="contact-section">
-      <div className="auto-container">
-        <div className="contact-title">
-          <h2>Add a new vehicle</h2>
-        </div>
-        <div className="row clearfix">
-          <div className="form-column col-lg-7">
-            <div className="inner-column">
-              <div className="contact-form">
-                <form onSubmit={handleSubmit}>
-                  <div className="row clearfix">
-                    <div className="form-group col-md-12">
-                      {serverError && (
-                        <div className="validation-error" role="alert">
-                          {serverError}
-                        </div>
-                      )}
-                      <input
-                        type="file"
-                        name="vehicle_image"
-                        value={vehicle_image}
-                        onChange={(event) => setImage(event.target.value)}
-                        placeholder="vehicle Image"
-                        required
-                      />
-                      { imageRequired && (
-                        <div className="validation-error" role="alert">
-                          {imageRequired}
-                        </div>
-                      )}
-                    </div>
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Year"
-                        value={vehicle_Year}
-                        onChange={(event) => setYear(event.target.value)}
-                        placeholder="vehicle Year"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Make"
-                        value={vehicle_Make}
-                        onChange={(event) => setMake(event.target.value)}
-                        placeholder="vehicle Make"
-                        required
-                      />
-                    </div>
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Model"
-                        value={vehicle_Model}
-                        onChange={(event) => setModel(event.target.value)}
-                        placeholder="vehicle Model"
-                        required
-                      />
-                      {modelRequired && (
-                        <div className="validation-error" role="alert">
-                          {modelRequired}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Type"
-                        value={vehicle_Type}
-                        onChange={(event) => setType(event.target.value)}
-                        placeholder="vehicle Type"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Mileage"
-                        value={vehicle_Mileage}
-                        onChange={(event) => setMileage(event.target.value)}
-                        placeholder="vehicle Mileage"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Tag"
-                        value={vehicle_Tag}
-                        onChange={(event) => setTag(event.target.value)}
-                        placeholder="vehicle Tag"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="vehicle_Serial"
-                        value={vehicle_Serial}
-                        onChange={(event) => setSerial(event.target.value)}
-                        placeholder="vehicle Serial"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="color"
-                        name="vehicle_Color"
-                        value={vehicle_Color}
-                        onChange={(event) => setColor(event.target.value)}
-                        placeholder="vehicle Color"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="number"
-                        name="vehicle_Total_price"
-                        value={vehicle_Total_Price}
-                        onChange={(event) => setTotalPrice(event.target.value)}
-                        placeholder="vehicle Price in Birr"
-                        required
-                      />
-                      {totalPriceRequired && (
-                        <div className="validation-error" role="alert">
-                          {totalPriceRequired}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <button
-                        className="theme-btn btn-style-one"
-                        type="submit"
-                        data-loading-text="Please wait..."
-                      >
-                        <span>Add vehicle</span>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+    <form
+      className="add-vehicle-form p-4 rounded shadow-sm bg-white"
+      onSubmit={handleSubmit}
+      style={{ maxWidth: 600, margin: "0 auto" }}
+    >
+      <h3 className="mb-3 text-primary fw-bold">Add New Vehicle</h3>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">
+          Image <span className="text-danger">*</span>
+        </label>
+        <input
+          type="file"
+          className={`form-control ${imageRequired ? "is-invalid" : ""}`}
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            setImage(file);
+            setImageRequired(false);
+          }}
+        />
+        {imageRequired && (
+          <div className="invalid-feedback">Image is required.</div>
+        )}
       </div>
-    </section>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Year</label>
+        <input
+          type="number"
+          className="form-control"
+          value={vehicle_year}
+          onChange={(e) => setYear(e.target.value)}
+          placeholder="Enter year"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Make</label>
+        <input
+          type="text"
+          className="form-control"
+          value={vehicle_make}
+          onChange={(e) => setMake(e.target.value)}
+          placeholder="Enter make"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">
+          Model <span className="text-danger">*</span>
+        </label>
+        <input
+          type="text"
+          className={`form-control ${modelRequired ? "is-invalid" : ""}`}
+          value={vehicle_model}
+          onChange={(e) => {
+            setModel(e.target.value);
+            setModelRequired(false);
+          }}
+          placeholder="Enter model"
+        />
+        {modelRequired && (
+          <div className="invalid-feedback">Model is required.</div>
+        )}
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Type</label>
+        <input
+          type="text"
+          className="form-control"
+          value={vehicle_type}
+          onChange={(e) => setType(e.target.value)}
+          placeholder="Enter type"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Mileage</label>
+        <input
+          type="number"
+          className="form-control"
+          value={vehicle_mileage}
+          onChange={(e) => setMileage(e.target.value)}
+          placeholder="Enter mileage"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Tag</label>
+        <input
+          type="text"
+          className="form-control"
+          value={vehicle_tag}
+          onChange={(e) => setTag(e.target.value)}
+          placeholder="Enter tag"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">
+          Serial <span className="text-danger">*</span>
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          value={vehicle_serial}
+          onChange={(e) => setSerial(e.target.value)}
+          placeholder="Enter serial"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Color</label>
+        <input
+          type="text"
+          className="form-control"
+          value={vehicle_color}
+          onChange={(e) => setColor(e.target.value)}
+          placeholder="Enter color"
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label fw-semibold">
+          Total Price <span className="text-danger">*</span>
+        </label>
+        <input
+          type="number"
+          className={`form-control ${totalPriceRequired ? "is-invalid" : ""}`}
+          value={vehicle_total_price}
+          onChange={(e) => {
+            setTotalPrice(e.target.value);
+            setTotalPriceRequired(false);
+          }}
+          placeholder="Enter total price"
+        />
+        {totalPriceRequired && (
+          <div className="invalid-feedback">Total price is required.</div>
+        )}
+      </div>
+      {success && (
+        <div className="alert alert-success">Vehicle added successfully!</div>
+      )}
+      {serverError && <div className="alert alert-danger">{serverError}</div>}
+      <button type="submit" className="btn btn-primary w-100 fw-bold py-2 mt-2">
+        Add Vehicle
+      </button>
+    </form>
   );
 }
 

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import adminService from "../../../../services/admin.service";
 
 function AddAdminForm() {
+  const [admin_role, setRole] = useState("");
   const [admin_email, setEmail] = useState("");
   const [admin_user_name, setUserName] = useState("");
   const [admin_first_name, setFirstName] = useState("");
@@ -85,7 +86,7 @@ function AddAdminForm() {
           // For now, just redirect to the home page
           setTimeout(() => {
             // window.location.href = '/admin/admins';
-            window.location.href = "/admin"; // Redirect to the admins page
+            window.location.href = "/admin/admins"; // Redirect to the admins page
           }, 2000);
         }
       })
@@ -102,120 +103,89 @@ function AddAdminForm() {
   };
 
   return (
-    <section className="contact-section">
+    <section className="contact-section py-4" style={{ background: "#f7f4e7", minHeight: "100vh" }}>
       <div className="auto-container">
-        <div className="contact-title">
-          <h2>Add a new admin</h2>
+        <div className="contact-title mb-4">
+          <h2 className="fw-bold text-primary">Add a new admin</h2>
         </div>
-        <div className="row clearfix">
+        <div className="row justify-content-center">
           <div className="form-column col-lg-7">
             <div className="inner-column">
-              <div className="contact-form">
+              <div className="contact-form p-4 rounded shadow-sm bg-white">
                 <form onSubmit={handleSubmit}>
-                  <div className="row clearfix">
-                    <div className="form-group col-md-12">
-                      {serverError && (
-                        <div className="validation-error" role="alert">
-                          {serverError}
-                        </div>
-                      )}
+                  <div className="row">
+                    <div className="form-group col-md-6 mb-3">
+                      <label className="form-label fw-semibold">First Name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={admin_first_name}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        placeholder="Enter first name"
+                        required
+                      />
+                    </div>
+                    <div className="form-group col-md-6 mb-3">
+                      <label className="form-label fw-semibold">Last Name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={admin_last_name}
+                        onChange={(e) => setLastName(e.target.value)}
+                        placeholder="Enter last name"
+                        required
+                      />
+                    </div>
+                    <div className="form-group col-md-12 mb-3">
+                      <label className="form-label fw-semibold">Email</label>
                       <input
                         type="email"
-                        name="admin_email"
+                        className="form-control"
                         value={admin_email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        placeholder="admin email"
-                      />
-                      {emailError && (
-                        <div className="validation-error" role="alert">
-                          {emailError}
-                        </div>
-                      )}
-                    </div>
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="admin_user_name"
-                        value={admin_user_name}
-                        onChange={(event) => setUserName(event.target.value)}
-                        placeholder="admin user name"
-                        required
-                      />
-                      {/* {userNameRequired && <div className="validation-error" role="alert">{userNameRequired}</div>} */}
-                    </div>
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="admin_first_name"
-                        value={admin_first_name}
-                        onChange={(event) => setFirstName(event.target.value)}
-                        placeholder="admin first name"
-                      />
-                      {firstNameRequired && (
-                        <div className="validation-error" role="alert">
-                          {firstNameRequired}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="text"
-                        name="admin_last_name"
-                        value={admin_last_name}
-                        onChange={(event) => setLastName(event.target.value)}
-                        placeholder="admin last name"
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
                         required
                       />
                     </div>
-
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-md-6 mb-3">
+                      <label className="form-label fw-semibold">Password</label>
                       <input
-                        type="text"
-                        name="admin_phone"
-                        value={admin_phone}
-                        onChange={(event) => setPhoneNumber(event.target.value)}
-                        placeholder="admin phone (555-555-5555)"
+                        type="password"
+                        className="form-control"
+                        value={admin_password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
                         required
                       />
                     </div>
-
-                    <div className="form-group col-md-12">
+                    <div className="form-group col-md-6 mb-3">
+                      <label className="form-label fw-semibold">Role</label>
                       <select
-                        name="admin_role"
-                        value={company_role_id}
-                        onChange={(event) =>
-                          setCompany_role_id(event.target.value)
-                        }
-                        className="custom-select-box"
+                        className="form-control"
+                        value={admin_role}
+                        onChange={(e) => setRole(e.target.value)}
+                        required
                       >
+                        <option value="">Select role</option>
                         <option value="2">Manager</option>
                         <option value="3">Admin</option>
                       </select>
                     </div>
-
-                    <div className="form-group col-md-12">
-                      <input
-                        type="password"
-                        name="admin_password"
-                        value={admin_password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="admin password"
-                      />
-                      {passwordError && (
-                        <div className="validation-error" role="alert">
-                          {passwordError}
+                    <div className="form-group col-md-12 mb-3">
+                      {serverError && (
+                        <div className="alert alert-danger" role="alert">
+                          {serverError}
+                        </div>
+                      )}
+                      {success && (
+                        <div className="alert alert-success" role="alert">
+                          Admin added successfully!
                         </div>
                       )}
                     </div>
-
                     <div className="form-group col-md-12">
-                      <button
-                        className="theme-btn btn-style-one"
-                        type="submit"
-                        data-loading-text="Please wait..."
-                      >
-                        <span>Add admin</span>
+                      <button type="submit" className="btn btn-primary w-100 fw-bold py-2">
+                        Add Admin
                       </button>
                     </div>
                   </div>

@@ -705,3 +705,12 @@
     height: 56px;
   }
 }
+
+/* Unauthorized CSS */
+
+.text-danger {
+  color: #d32f2f !important;
+}
+.bg-white {
+  background: #fff !important;
+}

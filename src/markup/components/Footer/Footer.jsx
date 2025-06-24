@@ -140,12 +140,12 @@ function Footer() {
 
           <div className="row">
             <div className="col-md-12 privacy_section">
-              <p className="text-center">
+              <div className="text-center">
                 <p className="text-center">
                   &copy; {new Date().getFullYear()} Archer Wholesale. All rights
                   reserved.
                 </p>
-              </p>
+              </div>
             </div>
           </div>
         </div>

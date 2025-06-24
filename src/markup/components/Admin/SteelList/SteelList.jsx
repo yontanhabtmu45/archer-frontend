@@ -8,9 +8,9 @@ import { format } from "date-fns";
 import steelService from "../../../../services/steel.service";
 
 // Icons
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import AdminMenu from "../AdminMenu/AdminMenu";
 
 function steelList() {
   // Create all the states we need to store the data
@@ -23,12 +23,13 @@ function steelList() {
   const [apiErrorMessage, setApiErrorMessage] = useState(null);
   // To get the logged in admin token
   const { admin } = useAuth();
-  let token = null; // To store the token
+  let token = ""; // To store the token
   if (admin) {
     token = admin.admin_token;
   }
 
   useEffect(() => {
+    if (!token) return;
     //  function to get all admins
     const allSteel = steelService.getAllSteels(token);
     allSteel
@@ -56,13 +57,15 @@ function steelList() {
       });
   }, []);
 
-  // Delete an steel 
+  // Delete an steel
   const handleDeleteSteel = async (steelId) => {
     if (!window.confirm("Are you sure you want to delete this steel?")) return;
     try {
       const response = await steelService.deleteSteel(steelId);
       if (response.status === "success") {
-        setSteels((prevSteels) => prevSteels.filter((steel) => steel.id !== steelId));
+        setSteels((prevSteels) =>
+          prevSteels.filter((steel) => steel.id !== steelId)
+        );
       } else {
         setApiError(true);
         setApiErrorMessage(response.message || "Failed to delete steel.");
@@ -85,62 +88,67 @@ function steelList() {
         </section>
       ) : (
         <>
-          <section className="contact-section">
-            <div className="auto-container">
-              <div className="contact-title">
-                <h2>Steels</h2>
-                <div className="text">
-                  Here you can see all the steel of the company. You can edit or
-                  delete any steels from this list.
-                </div>
+          <section className="container-fluid contact-section">
+            <div className="row auto-container">
+              <div className="col-md-3 admin-left-side">
+                <AdminMenu />
               </div>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>steel Image</th>
-                    <th>steel Type</th>
-                    <th>steel Weight</th>
-                    <th>steel Price / Ton</th>
-                    <th>steel Total Price</th>
-                    <th>Added Date</th>
-                    <th>Edit/Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {steels.map((steel) => (
-                    <tr key={steel.steel_id}>
-                      <td>{steel.steel_image}</td>
-                      <td>{steel.steel_year}</td>
-                      <td>{steel.steel_type}</td>
-                      <td>{steel.steel_price_per_ton}</td>
-                      <td>{steel.steel_total_price}</td>
-                      <td>
-                        {format(
-                          new Date(steel.added_date),
-                          "MM - dd - yyyy | kk:mm"
-                        )}
-                      </td>
-                      <td>
-                        <div className="edit-delete-icons d-flex justify-center align-center">
-                          <div className="edit">
-                            <Link
-                              to={`/steel/edit/${admin.steel_id}`}
-                            >
-                              <EditOutlinedIcon /> |
-                            </Link>
-                          </div>
-                          <div
-                            className="delete"
-                            onClick={() => handleDeleteSteel(admin.steel_id)}
-                          >
-                            <DeleteOutlineOutlinedIcon />
-                          </div>
-                        </div>
-                      </td>
+              <div className="col-md-9 admin-right-side admin-list auto-container">
+                <div className="contact-title">
+                  <h2>Steels</h2>
+                  <div className="text">
+                    Here you can see all the steel of the company. You can edit
+                    or delete any steels from this list.
+                  </div>
+                </div>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>steel Image</th>
+                      <th>steel Type</th>
+                      <th>steel Weight</th>
+                      <th>steel Price / Ton</th>
+                      <th>steel Total Price</th>
+                      <th>Added Date</th>
+                      <th>Edit/Delete</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {steels.map((steel, idx) => (
+                      <tr key={steel.steel_id}>
+                        <td>{idx + 1}</td>
+                        <td>{steel.steel_image}</td>
+                        <td>{steel.steel_year}</td>
+                        <td>{steel.steel_type}</td>
+                        <td>{steel.steel_price_per_ton}</td>
+                        <td>{steel.steel_total_price}</td>
+                        <td>
+                          {format(
+                            new Date(steel.added_date),
+                            "MM - dd - yyyy | kk:mm"
+                          )}
+                        </td>
+                        <td>
+                          <div className="edit-delete-icons d-flex justify-center align-center">
+                            <div className="edit">
+                              <Link to={`/steel/edit/${admin.steel_id}`}>
+                                <EditOutlinedIcon /> |
+                              </Link>
+                            </div>
+                            <div
+                              className="delete"
+                              onClick={() => handleDeleteSteel(admin.steel_id)}
+                            >
+                              <DeleteOutlineOutlinedIcon />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
             </div>
           </section>
         </>

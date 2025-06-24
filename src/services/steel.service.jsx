@@ -17,7 +17,8 @@ const createSteel = async (formData) => {
 const getAllSteels = async (token) => {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json", "x-access-token": token },
+    headers: { "Content-Type": "application/json", 
+      "x-access-token": token }
   };
   const response = await fetch(`${api_url}/api/steels`, requestOptions);
   return response;
@@ -56,6 +57,7 @@ const deleteSteel = async (token, id) => {
 
 // Export all the functions
 const steelService = {
+  // checkIfSteelExist,
   createSteel,
   getAllSteels,
   getSteelById,

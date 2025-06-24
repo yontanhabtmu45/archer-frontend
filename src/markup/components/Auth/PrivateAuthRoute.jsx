@@ -14,20 +14,13 @@ const PrivateAuthRoute = ({ roles, children }) => {
     // Retrieve the logged in user from local storage
     const loggedInAdmin = getAuth();
     // console.log(loggedInAdmin);
-    loggedInAdmin.then((response) => {
-      if (response.admin_token) {
-        // If in here, that means the user is logged in 
-        // console.log(response);
-        // console.log("Set logged in to true");
-        setIsLogged(true);
-        if (roles && roles.length > 0 && roles.includes(response.admin_role)) {
-          // If in here, that means the user is logged and has  authorization to access the route 
-          // console.log("Set authorized to true");
-          setIsAuthorized(true);
-        }
+    if (loggedInAdmin.admin_token) {
+      setIsLogged(true);
+      if (roles && roles.length > 0 && roles.includes(loggedInAdmin.admin_role)) {
+        setIsAuthorized(true);
       }
-      setIsChecked(true);
-    });
+    }
+    setIsChecked(true);
   }, [roles]);
   if (isChecked) {
     if (!isLogged) {

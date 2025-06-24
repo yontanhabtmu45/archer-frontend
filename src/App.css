@@ -730,3 +730,39 @@
   }
   
 }
+
+.add-steel-form {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.add-steel-form .form-label {
+  font-weight: 600;
+}
+.add-steel-form .btn-primary {
+  background: linear-gradient(90deg, #2e5c8a 60%, #4fc3f7 100%);
+  border: none;
+}
+.add-steel-form .btn-primary:hover {
+  background: linear-gradient(90deg, #18425e 60%, #039be5 100%);
+}
+
+.add-vehicle-form {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.add-vehicle-form .form-label {
+  font-weight: 600;
+}
+.add-vehicle-form .btn-primary {
+  background: linear-gradient(90deg, #2e5c8a 60%, #4fc3f7 100%);
+  border: none;
+}
+.add-vehicle-form .btn-primary:hover {
+  background: linear-gradient(90deg, #18425e 60%, #039be5 100%);
+}
