@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom"
 import { Table, Button } from "react-bootstrap";
 // Import the auth hook
 import { useAuth } from "../../../../Context/AuthContext";
@@ -10,10 +11,11 @@ import AdminMenu from "../AdminMenu/AdminMenu";
 import { Link } from "react-router-dom";
 
 // Icons
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 function AdminsList() {
+  const Navigate = useNavigate();
   // Create all the states we need to store the data
   // Create the admins state to store the admins data
   const [admins, setAdmins] = useState([]);
@@ -21,6 +23,10 @@ function AdminsList() {
   const [apiError, setApiError] = useState(false);
   // A state to store the error message
   const [apiErrorMessage, setApiErrorMessage] = useState(null);
+  // A state to store deletion error
+  const [Error, setError] = useState("");
+  //  A state to store success message
+  const [Success, setSuccess] = useState("");
   // To get the logged in admin token
   const { admin } = useAuth();
   let token = ""; // To store the token
@@ -28,7 +34,7 @@ function AdminsList() {
     token = admin.admin_token;
   }
 
-  useEffect(() => {
+    const fetchAdmins = () => {
     // Call the getAllAdmins function
     const allAdmins = adminService.getAllAdmins(token);
     allAdmins
@@ -43,6 +49,7 @@ function AdminsList() {
           } else {
             setApiErrorMessage("Please try again later");
           }
+          return null;
         }
         return res.json();
       })
@@ -54,23 +61,37 @@ function AdminsList() {
       .catch((err) => {
         // console.log(err);
       });
-  }, []);
+    }
+
+    useEffect(() => {
+      fetchAdmins();
+    }, [token]);
+
 
   // Delete an admin
-  const handleDelete = async (adminId) => {
-    if (!window.confirm("Are you sure you want to delete this admin?")) return;
+  
+  const handleDelete = async (id) => {
+    setError("");
+    setSuccess("");
     try {
-      const response = await adminService.deleteAdmin(
-        adminId,
-        admin.admin_token
-      );
-      if (response.status === "success") {
-        setAdmins((prev) => prev.filter((a) => a.admin_id !== adminId));
+      const response = await adminService.deleteAdmin(id, token);
+      const data = await response.json(); // Always parse JSON
+      if (data.status === "success") {
+        setSuccess("Admin deleted successfully!");
+        setTimeout(() => {
+          setSuccess("");
+          // Optionally refresh the admin list here:
+          fetchAdmins();
+        }, 1500);
+        // Optionally refresh the list here
       } else {
-        alert(response.message || "Failed to delete admin.");
+        setError(data.message || "An error occurred while deleting the admin.");
+        setTimeout(() => setError(""), 2000);
       }
     } catch (err) {
-      alert("An error occurred while deleting the admin.");
+      setError("An error occurred while deleting the admin.");
+      setTimeout(() => setError(""), 2000);
+      console.log(err);
     }
   };
 
@@ -98,6 +119,18 @@ function AdminsList() {
                     Here you can see all the admins of the company. You can edit
                     or delete any employee from this list.
                   </div>
+                </div>
+                <div className="admin-alerts-container my-3">
+                  {Error && (
+                    <div className="alert alert-danger custom-alert">
+                      {Error}
+                    </div>
+                  )}
+                  {Success && (
+                    <div className="alert alert-success custom-alert">
+                      {Success}
+                    </div>
+                  )}
                 </div>
                 <Table striped bordered hover>
                   <thead>
@@ -131,14 +164,17 @@ function AdminsList() {
                           <div className="edit-delete-icons d-flex justify-center align-center">
                             <div className="edit">
                               <Link
-                                to={`/admin/edit/${admin.admin_id}`}
+                                to={`/admin/${admin.admin_id}`}
                                 // className="btn btn-primary btn-sm ms-2"
                               >
-                                <EditOutlinedIcon />  |
+                                <EditOutlinedIcon /> |
                               </Link>
                             </div>
-                            <div className="delete" onClick={() => handleDelete(admin.admin_id)}>
-                              <DeleteOutlineOutlinedIcon /> 
+                            <div
+                              className="delete"
+                              onClick={() => handleDelete(admin.admin_id)}
+                            >
+                              <DeleteOutlineOutlinedIcon />
                             </div>
                           </div>
                         </td>

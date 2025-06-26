@@ -24,14 +24,24 @@ const getAllAdmins = async (token) => {
 }
 
 // a function to send get request to get a single Admin
-const getAdmin = async (token, id) => {
+const getAdmin = async (id) => {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json',
-      'x-access-token': token }
+    headers: { 'Content-Type': 'application/json' }
     };
     const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
     return response;
+}
+
+// a function to update an admin
+const updateAdmin = async (id, formData) =>{
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+      };
+      const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
+      return response;
 }
 
 // a function to delete an admin
@@ -43,18 +53,6 @@ const deleteAdmin = async (id, token) => {
   };
   const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
   return response;
-}
-
-// a function to update an admin
-const updateAdmin = async (id, formData, token) =>{
-  const requestOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json',
-      'x-access-token': token },
-      body: JSON.stringify(formData)
-      };
-      const response = await fetch(`${api_url}/api/admin/edit/${id}`, requestOptions);
-      return response;
 }
 
 // Export all the functions 

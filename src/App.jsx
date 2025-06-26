@@ -18,15 +18,19 @@ import AddAdmin from "./markup/pages/admin/AddAdmin";
 import AddVehicle from "./markup/pages/admin/AddVehicle";
 import AddSteel from "./markup/pages/admin/AddSteel";
 import AdminsList from "./markup/components/Admin/AdminsList/AdminsList";
-import VehiclesList from "./markup/components/Admin/VehicleList/VehicleList";
-import SteelsList from "./markup/components/Admin/SteelList/SteelList";
+import VehicleList from "./markup/components/Admin/VehicleList/VehicleList";
+import SteelList from "./markup/components/Admin/SteelList/SteelList";
 
 // Importing CSS files for styling
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
+
+
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
 import EditAdmin from "./markup/components/Admin/AdminsList/EditAdmin";
+import EditVehicle from "./markup/components/Admin/VehicleList/EditVehicle"
+import EditSteel from "./markup/components/Admin/SteelList/EditSteel";
 
 function App() {
   return (
@@ -54,7 +58,7 @@ function App() {
         {/* add the AddAdmin Route */}
         <Route path="/admin/admins" element={<AdminsList />} />
         <Route
-          path="/admin/edit/:id"
+          path="/admin/:id"
           element={
             <PrivateAuthRoute roles={[2, 3]}>
               <EditAdmin />
@@ -70,10 +74,10 @@ function App() {
           }
         />
         {/* add the AddVehicle Route */}
-        <Route path="/admin/vehicles" element={<VehiclesList />} />
-        <Route path="/admin/vehicles/edit/:id" element={
+        <Route path="/admin/vehicles" element={<VehicleList />} />
+        <Route path="/admin/vehicle/:id" element={
           <PrivateAuthRoute roles={[2, 3]}>
-            <VehiclesList />
+            <EditVehicle />
           </PrivateAuthRoute>
         } />
         <Route
@@ -85,10 +89,10 @@ function App() {
           }
         />
         {/* add the AddSteel Route */}
-        <Route path="/admin/steels" element={<SteelsList />} />
-        <Route path="/admin/steels/edit/:id" element={
+        <Route path="/admin/steels" element={<SteelList />} />
+        <Route path="/admin/steel/:id" element={
           <PrivateAuthRoute roles={[2, 3]}>
-            <SteelsList />
+            <EditSteel />
           </PrivateAuthRoute>
         } />
         <Route

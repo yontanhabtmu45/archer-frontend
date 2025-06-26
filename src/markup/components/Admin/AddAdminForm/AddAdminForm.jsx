@@ -11,7 +11,7 @@ function AddAdminForm() {
   const [admin_phone, setPhoneNumber] = useState("");
   const [admin_password, setPassword] = useState("");
   // const [active_admin, setActive_admin] = useState(1);
-  const [company_role_id, setCompany_role_id] = useState(1);
+  const [company_role_id, setCompany_role_id] = useState('');
   // Errors
   const [emailError, setEmailError] = useState("");
   const [firstNameRequired, setFirstNameRequired] = useState("");
@@ -162,8 +162,8 @@ function AddAdminForm() {
                       <label className="form-label fw-semibold">Role</label>
                       <select
                         className="form-control"
-                        value={admin_role}
-                        onChange={(e) => setRole(e.target.value)}
+                        value={company_role_id}
+                        onChange={(e) => setCompany_role_id(e.target.value)}
                         required
                       >
                         <option value="">Select role</option>

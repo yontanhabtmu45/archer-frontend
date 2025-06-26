@@ -69,3 +69,56 @@ input:disabled {
   font-weight: 600;
   font-size: 1.5em;
 }
+
+/* Edit Admin CSS */
+
+.edit-admin-section {
+  min-height: 80vh;
+  background: #f7f4e7;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.edit-admin-form-wrapper {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.edit-admin-form-wrapper .form-label {
+  font-weight: 600;
+}
+.edit-admin-form-wrapper .btn-primary {
+  background: linear-gradient(90deg, #2e5c8a 60%, #4fc3f7 100%);
+  border: none;
+}
+.edit-admin-form-wrapper .btn-primary:hover {
+  background: linear-gradient(90deg, #18425e 60%, #039be5 100%);
+}
+
+/* admin alert */
+.admin-alerts-container {
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+  text-align: center;
+}
+.custom-alert {
+  font-size: 1.1rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.alert-success {
+  background: linear-gradient(90deg, #e0f7fa 60%, #b2ebf2 100%);
+  color: #00796b;
+  border: none;
+}
+.alert-danger {
+  background: linear-gradient(90deg, #ffebee 60%, #ffcdd2 100%);
+  color: #c62828;
+  border: none;
+}
+
+

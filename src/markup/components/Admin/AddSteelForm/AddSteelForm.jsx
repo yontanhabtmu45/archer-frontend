@@ -50,15 +50,15 @@ function AddSteelForm() {
     }
 
     const formData = {
-      "image": steel_image,
-      "type": steel_type,
-      "weight": steel_weight,
-      "price_per_ton": steel_price_per_ton,
-      "total_price": steel_total_price,
+      steel_image,
+      steel_type,
+      steel_weight,
+      steel_price_per_ton,
+      steel_total_price,
     };
 
     // Pass the form data to the service
-    const newSteel = steelService.createSteel(formData)
+    const newSteel = steelService.createSteel(formData);
     newSteel
       .then((response) => response.json())
       .then((data) => {
@@ -88,37 +88,50 @@ function AddSteelForm() {
           error.toString();
         setServerError(resMessage);
       });
-
-
   };
 
   return (
-    <form className="add-steel-form p-4 rounded shadow-sm bg-white" onSubmit={handleSubmit} style={{ maxWidth: 500, margin: "0 auto" }}>
+    <form
+      className="add-steel-form p-4 rounded shadow-sm bg-white"
+      onSubmit={handleSubmit}
+      style={{ maxWidth: 500, margin: "0 auto" }}
+    >
       <h3 className="mb-3 text-primary fw-bold">Add New Steel</h3>
       <div className="mb-3">
-  <label className="form-label fw-semibold">Image <span className="text-danger">*</span></label>
-  <input
-    type="file"
-    className={`form-control ${imageRequired ? "is-invalid" : ""}`}
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files[0];
-      setImage(file);
-      setImageRequired(false);
-    }}
-  />
-  {imageRequired && <div className="invalid-feedback">Image is required.</div>}
-</div>
+        <label className="form-label fw-semibold">
+          Image <span className="text-danger">*</span>
+        </label>
+        <input
+          type="file"
+          className={`form-control ${imageRequired ? "is-invalid" : ""}`}
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            setImage(file);
+            setImageRequired(false);
+          }}
+        />
+        {imageRequired && (
+          <div className="invalid-feedback">Image is required.</div>
+        )}
+      </div>
       <div className="mb-3">
-        <label className="form-label fw-semibold">Type <span className="text-danger">*</span></label>
+        <label className="form-label fw-semibold">
+          Type <span className="text-danger">*</span>
+        </label>
         <input
           type="text"
           className={`form-control ${typeRequired ? "is-invalid" : ""}`}
           value={steel_type}
-          onChange={(e) => { setType(e.target.value); setTypeRequired(false); }}
+          onChange={(e) => {
+            setType(e.target.value);
+            setTypeRequired(false);
+          }}
           placeholder="Enter steel type"
         />
-        {typeRequired && <div className="invalid-feedback">Type is required.</div>}
+        {typeRequired && (
+          <div className="invalid-feedback">Type is required.</div>
+        )}
       </div>
       <div className="mb-3">
         <label className="form-label fw-semibold">Weight (tons)</label>
@@ -131,15 +144,22 @@ function AddSteelForm() {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label fw-semibold">Price per Ton <span className="text-danger">*</span></label>
+        <label className="form-label fw-semibold">
+          Price per Ton <span className="text-danger">*</span>
+        </label>
         <input
           type="number"
           className={`form-control ${PriceRequired ? "is-invalid" : ""}`}
           value={steel_price_per_ton}
-          onChange={(e) => { setPricePerTon(e.target.value); setPriceRequired(false); }}
+          onChange={(e) => {
+            setPricePerTon(e.target.value);
+            setPriceRequired(false);
+          }}
           placeholder="Enter price per ton"
         />
-        {PriceRequired && <div className="invalid-feedback">Price per ton is required.</div>}
+        {PriceRequired && (
+          <div className="invalid-feedback">Price per ton is required.</div>
+        )}
       </div>
       <div className="mb-3">
         <label className="form-label fw-semibold">Total Price</label>
@@ -151,13 +171,15 @@ function AddSteelForm() {
           placeholder="Enter total price"
         />
       </div>
-      {success && <div className="alert alert-success">Steel added successfully!</div>}
+      {success && (
+        <div className="alert alert-success">Steel added successfully!</div>
+      )}
       {serverError && <div className="alert alert-danger">{serverError}</div>}
       <button type="submit" className="btn btn-primary w-100 fw-bold py-2 mt-2">
         Add Steel
       </button>
     </form>
-  )
+  );
 }
 
 export default AddSteelForm;

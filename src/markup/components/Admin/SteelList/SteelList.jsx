@@ -6,13 +6,14 @@ import { useAuth } from "../../../../Context/AuthContext";
 import { format } from "date-fns";
 // Import the getAllSteel function
 import steelService from "../../../../services/steel.service";
+import { Link } from "react-router-dom";
+import AdminMenu from "../AdminMenu/AdminMenu";
 
 // Icons
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import AdminMenu from "../AdminMenu/AdminMenu";
 
-function steelList() {
+function SteelList() {
   // Create all the states we need to store the data
   // Create the steels state to store the steels data
   const [steels, setSteels] = useState([]);
@@ -21,6 +22,10 @@ function steelList() {
   const [apiError, setApiError] = useState(false);
   // A state to store the error message
   const [apiErrorMessage, setApiErrorMessage] = useState(null);
+  // A state to store deletion error
+  const [Error, setError] = useState("");
+  //  A state to store success message
+  const [Success, setSuccess] = useState("");
   // To get the logged in admin token
   const { admin } = useAuth();
   let token = ""; // To store the token
@@ -28,9 +33,9 @@ function steelList() {
     token = admin.admin_token;
   }
 
-  useEffect(() => {
-    if (!token) return;
-    //  function to get all admins
+  const fetchSteels = () => {
+    // if (!token) return;
+    //  function to get all vehicles
     const allSteel = steelService.getAllSteels(token);
     allSteel
       .then((res) => {
@@ -44,35 +49,52 @@ function steelList() {
           } else {
             setApiErrorMessage("Please try again later");
           }
+          return null;
         }
         return res.json();
       })
       .then((data) => {
         if (data.data.length !== 0) {
-          setAdmins(data.data);
+          setSteels(data.data);
         }
       })
       .catch((err) => {
-        // console.log(err);
+        setApiError(true);
+        setApiErrorMessage("An error occurred while fetching steel data.");
+        console.log(err);
       });
-  }, []);
+  };
+  useEffect(() => {
+    fetchSteels();
+  }, [token]);
 
   // Delete an steel
-  const handleDeleteSteel = async (steelId) => {
-    if (!window.confirm("Are you sure you want to delete this steel?")) return;
+  const handleDeleteSteel = async (id) => {
+    // if (!id) {
+    //   setError("Invalid steel ID.");
+    //   return;
+    // }
+    setError("");
+    setSuccess("");
     try {
-      const response = await steelService.deleteSteel(steelId);
-      if (response.status === "success") {
-        setSteels((prevSteels) =>
-          prevSteels.filter((steel) => steel.id !== steelId)
-        );
+      const response = await steelService.deleteSteel(token, id);
+      window.confirm("Are you sure want to delete!");
+      const data = await response.json();
+      if (data.status === "success") {
+        setSuccess("Steel deleted successfully!");
+        setTimeout(() => {
+          setSuccess("");
+          // Optionally refresh the Steel list here:
+          fetchSteels();
+        }, 1500);
       } else {
-        setApiError(true);
-        setApiErrorMessage(response.message || "Failed to delete steel.");
+        setError(data.message || "An error occurred while deleting the Steel.");
+        setTimeout(() => setError(""), 2000);
       }
     } catch (err) {
-      setApiError(true);
-      setApiErrorMessage("An error occurred while deleting the steel.");
+      setError("An error occurred while deleting the Steel.");
+      setTimeout(() => setError(""), 2000);
+      console.log(err);
     }
   };
 
@@ -101,53 +123,71 @@ function steelList() {
                     or delete any steels from this list.
                   </div>
                 </div>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>steel Image</th>
-                      <th>steel Type</th>
-                      <th>steel Weight</th>
-                      <th>steel Price / Ton</th>
-                      <th>steel Total Price</th>
-                      <th>Added Date</th>
-                      <th>Edit/Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {steels.map((steel, idx) => (
-                      <tr key={steel.steel_id}>
-                        <td>{idx + 1}</td>
-                        <td>{steel.steel_image}</td>
-                        <td>{steel.steel_year}</td>
-                        <td>{steel.steel_type}</td>
-                        <td>{steel.steel_price_per_ton}</td>
-                        <td>{steel.steel_total_price}</td>
-                        <td>
-                          {format(
-                            new Date(steel.added_date),
-                            "MM - dd - yyyy | kk:mm"
-                          )}
-                        </td>
-                        <td>
-                          <div className="edit-delete-icons d-flex justify-center align-center">
-                            <div className="edit">
-                              <Link to={`/steel/edit/${admin.steel_id}`}>
-                                <EditOutlinedIcon /> |
-                              </Link>
-                            </div>
-                            <div
-                              className="delete"
-                              onClick={() => handleDeleteSteel(admin.steel_id)}
-                            >
-                              <DeleteOutlineOutlinedIcon />
-                            </div>
-                          </div>
-                        </td>
+                <div className="admin-alerts-container my-3">
+                  {Error && (
+                    <div className="alert alert-danger custom-alert">
+                      {Error}
+                    </div>
+                  )}
+                  {Success && (
+                    <div className="alert alert-success custom-alert">
+                      {Success}
+                    </div>
+                  )}
+                </div>
+                <div className="vehicle-table-responsive">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>steel Image</th>
+                        <th>steel Type</th>
+                        <th>steel Price / Ton</th>
+                        <th>steel Total Price</th>
+                        <th>Added Date</th>
+                        <th>Edit/Delete</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {steels.map((steel, idx) => (
+                        <tr key={steel.steel_id}>
+                          <td>{idx + 1}</td>
+                          <td>{steel.steel_image}</td>
+                          <td>{steel.steel_type}</td>
+                          <td>{steel.steel_price_per_ton}</td>
+                          <td>{steel.steel_total_price}</td>
+                          <td>
+                            {steel.steel_added_date
+                              ? format(
+                                  new Date(steel.steel_added_date),
+                                  "MM - dd - yyyy"
+                                )
+                              : "N/A"}
+                          </td>
+                          <td>
+                            <div className="edit-delete-icons d-flex justify-center align-center">
+                              <div className="edit">
+                                <Link
+                                  to={`/admin/steel/${steel.steel_iden_id}`}
+                                >
+                                  <EditOutlinedIcon /> |
+                                </Link>
+                              </div>
+                              <div
+                                className="delete"
+                                onClick={() =>
+                                  handleDeleteSteel(steel.steel_iden_id)
+                                }
+                              >
+                                <DeleteOutlineOutlinedIcon />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
               </div>
             </div>
           </section>
@@ -157,4 +197,4 @@ function steelList() {
   );
 }
 
-export default steelList;
+export default SteelList;
