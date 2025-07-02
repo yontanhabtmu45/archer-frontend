@@ -67,7 +67,7 @@ function EditSteel() {
       if (newImageFile) {
         const formData = new FormData();
         formData.append("image", newImageFile);
-        const uploadRes = await fetch("http://localhost:2716/api/upload", {
+        const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
           method: "POST",
           body: formData,
         });
@@ -78,7 +78,7 @@ function EditSteel() {
       }
 
       // Now update the steel
-      const response = await fetch(`http://localhost:2716/api/steel/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/steel/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedSteel),

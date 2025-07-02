@@ -65,7 +65,7 @@ function EditVehicle() {
       if (newImageFile) {
         const formData = new FormData();
         formData.append("image", newImageFile);
-        const uploadRes = await fetch("http://localhost:2716/api/upload", {
+        const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
           method: "POST",
           body: formData,
         });
@@ -76,7 +76,7 @@ function EditVehicle() {
       }
 
       // Now update the vehicle
-      const response = await fetch(`http://localhost:2716/api/vehicle/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/vehicle/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedVehicle),

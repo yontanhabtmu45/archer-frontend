@@ -67,7 +67,7 @@ function AddVehicleForm() {
       });
       const imagePath = uploadRes.data.imagePath;
       // .catch(err => console.log(err))
-      // const uploadRes = await fetch("http://localhost:2716/api/upload", {
+      // const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
       //   method: "POST",
       //   body: formData,
       // });

@@ -576,6 +576,11 @@
 }
 
 /* Admin Dashboard Enhanced Styles */
+
+.main-dashboard{
+  width: 100vw;
+}
+
 .admin-dashboard {
   color: #12314a;
   padding: 2rem;

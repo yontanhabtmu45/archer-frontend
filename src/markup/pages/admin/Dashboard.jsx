@@ -1,5 +1,5 @@
 // Import the AddVehicleForm component
-import  AddVehicleForm from '../../components/Admin/Dashboard/Dashboard'
+import  Dashboard from '../../components/Admin/Dashboard/Dashboard'
 // Import the AdminMenu component 
 import AdminMenu from '../../components/Admin/AdminMenu/AdminMenu';
 

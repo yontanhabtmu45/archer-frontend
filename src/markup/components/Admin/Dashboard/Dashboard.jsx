@@ -4,10 +4,9 @@ import { Link } from "react-router";
 
 function Dashboard() {
   return (
-    <section className="main-cars">
-      <div className="container-fluid px-2 admin-pages">
-        <div className="row">
-          <div className="col-md-9 admin-right-side">
+    <section className="container-fluid main-dashboard">
+      <div className="row px-2 admin-pages">
+        <div className="col-md-9 admin-right-side">
             <section className="services-section">
               <div className="admin-dashboard">
                 <h2>Admin Dashboard</h2>
@@ -38,7 +37,6 @@ function Dashboard() {
                 </div>
               </div>
             </section>
-          </div>
         </div>
       </div>
     </section>

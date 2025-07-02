@@ -50,7 +50,7 @@ function AddSteelForm() {
       // 1. Upload image and get path
       const formData = new FormData();
       formData.append("image", steel_image);
-      const uploadRes = await fetch("http://localhost:2716/api/upload", {
+      const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
