@@ -148,42 +148,45 @@ function VehicleList() {
                       </tr>
                     </thead>
                     <tbody>
-                      {vehicles.map((vehicle, idx) => (
-                        <tr key={vehicle.vehicle_id}>
-                          <td>{idx + 1}</td>
-                          <td>{vehicle.vehicle_image}</td>
-                          <td>{vehicle.vehicle_year}</td>
-                          <td>{vehicle.vehicle_make}</td>
-                          <td>{vehicle.vehicle_model}</td>
-                          <td>{vehicle.vehicle_type}</td>
-                          <td>{vehicle.vehicle_mileage}</td>
-                          <td>{vehicle.vehicle_tag}</td>
-                          <td>{vehicle.vehicle_serial}</td>
-                          <td>{vehicle.vehicle_color}</td>
-                          <td>{vehicle.vehicle_total_price}</td>
-                          <td>
-                            {format(
-                              new Date(vehicle.vehicle_added_date),
-                              "MM - dd - yyyy "
-                            )}
-                          </td>
-                          <td>
-                            <div className="edit-delete-icons d-flex justify-center align-center">
-                              <div className="edit">
-                                <Link to={`/admin/vehicle/${vehicle.vehicle_iden_id}`}>
-                                  <EditOutlinedIcon /> |
-                                </Link>
+                      {vehicles.map((vehicle, idx) => {
+                        // console.log(vehicle); 
+                        return (
+                          <tr key={vehicle.vehicle_id}>
+                            <td>{idx + 1}</td>
+                            <td>{vehicle.vehicle_image}</td>
+                            <td>{vehicle.vehicle_year}</td>
+                            <td>{vehicle.vehicle_make}</td>
+                            <td>{vehicle.vehicle_model}</td>
+                            <td>{vehicle.vehicle_type}</td>
+                            <td>{vehicle.vehicle_mileage}</td>
+                            <td>{vehicle.vehicle_tag}</td>
+                            <td>{vehicle.vehicle_serial}</td>
+                            <td>{vehicle.vehicle_color}</td>
+                            <td>{vehicle.vehicle_total_price}</td>
+                            <td>
+                              {format(
+                                new Date(vehicle.vehicle_added_date),
+                                "MM - dd - yyyy "
+                              )}
+                            </td>
+                            <td>
+                              <div className="edit-delete-icons d-flex justify-center align-center">
+                                <div className="edit">
+                                  <Link to={`/admin/vehicle/${vehicle.vehicle_iden_id}`}>
+                                    <EditOutlinedIcon /> |
+                                  </Link>
+                                </div>
+                                <div
+                                  className="delete"
+                                  onClick={() => handleDeleteVehicle(vehicle.vehicle_iden_id)}
+                                >
+                                  <DeleteOutlineOutlinedIcon />
+                                </div>
                               </div>
-                              <div
-                                className="delete"
-                                onClick={() => handleDeleteVehicle(vehicle.vehicle_iden_id)}
-                              >
-                                <DeleteOutlineOutlinedIcon />
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </Table>
                 </div>

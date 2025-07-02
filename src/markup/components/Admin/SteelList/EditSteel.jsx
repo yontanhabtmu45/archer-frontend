@@ -10,6 +10,7 @@ function EditSteel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [newImageFile, setNewImageFile] = useState(null);
 
   useEffect(() => {
     if (!id) {
@@ -44,30 +45,61 @@ function EditSteel() {
   }, [id]);
 
   const handleChange = (e) => {
-    setSteel({
-      ...steel,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, files } = e.target;
+    if (name === "steel_image" && files.length > 0) {
+      setNewImageFile(files[0]);
+    } else {
+      setSteel({
+        ...steel,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setError("");
-    setSuccess("");
-
     try {
-      const response = await steelService.updateSteel(id, steel);
-      const data = await response.json();
+      let updatedSteel = { ...steel };
 
-      if (data.status === "success") {
-        setSuccess("Steel updated successfully!");
-        setTimeout(() => navigate("/admin/steels"), 1200);
+      // If a new image is selected, upload it first
+      if (newImageFile) {
+        const formData = new FormData();
+        formData.append("image", newImageFile);
+        const uploadRes = await fetch("http://localhost:2716/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok)
+          throw new Error(uploadData.error || "Image upload failed");
+        updatedSteel.steel_image = uploadData.imagePath;
+      }
+
+      // Now update the steel
+      const response = await fetch(`http://localhost:2716/api/steel/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedSteel),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setSteel(data.data || data);
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/admin/steels");
+        }, 1000);
       } else {
-        setError(data.message || "Failed to update steel.");
+        setError((data && data.message) || "Failed to update steel.");
+        setSuccess(false);
       }
     } catch (err) {
       setError("Error updating steel.");
-      console.log(err)
+      setSuccess(false);
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 

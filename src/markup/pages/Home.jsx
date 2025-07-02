@@ -87,7 +87,7 @@ function Home() {
             <div className="col-12 text-center pt-4">
               <h2>About Us</h2>
             </div>
-            <div className="col-12 col-md-6 pr-5 about-content">
+            <div className=" col-md-6 about-content">
               <p>
                 Archer Wholesale is your premier destination for high-quality
                 vehicles and construction steels. We are committed to providing
@@ -97,7 +97,7 @@ function Home() {
                 </button>
               </p>
             </div>
-            <div className="col-12 col-md-6 about-image">
+            <div className=" col-md-6 pl-5 about-image">
               <img src={about} alt="home-car" />
             </div>
           </div>

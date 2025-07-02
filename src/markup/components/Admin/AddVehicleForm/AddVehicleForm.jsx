@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import vehicleService from "../../../../services/vehicle.service";
 
+import axios from "../../../../api/axios"
+
 function AddVehicleForm() {
   const [vehicle_image, setImage] = useState("");
   const [vehicle_year, setYear] = useState("");
@@ -21,13 +23,16 @@ function AddVehicleForm() {
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState("");
 
-  const handleSubmit = (e) => {
-    // Prevent the default behavior of the form
-    e.preventDefault();
-    // Handle client side validations
-    let valid = true; // Flag
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+    setImageRequired("");
+  };
 
-    // Image is required
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    // Image validation
     if (!vehicle_image) {
       setImageRequired("vehicle image is required");
       valid = false;
@@ -35,7 +40,7 @@ function AddVehicleForm() {
       setImageRequired("");
     }
 
-    // Model is required
+    // Model validation
     if (!vehicle_model) {
       setModelRequired("vehicle Model is required");
       valid = false;
@@ -43,7 +48,7 @@ function AddVehicleForm() {
       setModelRequired("");
     }
 
-    // Price is required
+    // Price validation
     if (!vehicle_total_price) {
       setTotalPriceRequired("vehicle Model is required");
       valid = false;
@@ -51,55 +56,57 @@ function AddVehicleForm() {
       setTotalPriceRequired("");
     }
 
-    // If the form is not valid, do not submit
-    if (!valid) {
-      return;
-    }
+    if (!valid) return;
 
-    const formData = {
-      vehicle_image,
-      vehicle_make,
-      vehicle_model,
-      vehicle_year,
-      vehicle_type,
-      vehicle_mileage,
-      vehicle_tag,
-      vehicle_serial,
-      vehicle_color,
-      vehicle_total_price,
-    };
-
-    // Pass the form data to the service
-    const newVehicle = vehicleService.createVehicle(formData);
-    newVehicle
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // If Error is returned from the API server, set the error message
-        if (data.error) {
-          setServerError(data.error);
-        } else {
-          // Handle successful response
-          setSuccess(true);
-          setServerError("");
-          // Redirect to the vehicle page after 2 seconds
-          // For now, just redirect to the home page
-          setTimeout(() => {
-            // window.location.href = '/admin/vehicle';
-            window.location.href = "/admin/vehicles"; // Redirect to the vehicles page
-          }, 2000);
-        }
-      })
-      // Handle Catch
-      .catch((error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        setServerError(resMessage);
+    try {
+      // 1. Upload image and get path
+      const formData = new FormData();
+      formData.append("image", vehicle_image);
+      const uploadRes = await axios.post("/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
+      const imagePath = uploadRes.data.imagePath;
+      // .catch(err => console.log(err))
+      // const uploadRes = await fetch("http://localhost:2716/api/upload", {
+      //   method: "POST",
+      //   body: formData,
+      // });
+      // const uploadData = await uploadRes.json();
+      // if (!uploadRes.ok)
+      //   throw new Error(uploadData.error || "Image upload failed");
+
+      // 2. Prepare vehicle data
+      const vehicleData = {
+        vehicle_model,
+        vehicle_year,
+        vehicle_make,
+        vehicle_type,
+        vehicle_mileage,
+        vehicle_tag,
+        vehicle_serial,
+        vehicle_color,
+        vehicle_total_price,
+        // vehicle_image: imagePath,
+      };
+
+      // 3. Create vehicle
+      const response = await vehicleService.createVehicle(vehicleData);
+
+      if (response.ok) {
+        setSuccess(true);
+        setServerError("");
+        // Optionally reset form here
+        setTimeout(() => {
+          window.location.href = "/admin/vehicles"; // Redirect to the vehicles page
+        }, 2000);
+      } else {
+        setServerError("Failed to add vehicle. Please try again.");
+        setSuccess(false);
+      }
+    } catch (err) {
+      setServerError("Failed to add vehicle. Please try again.");
+      setSuccess(false);
+    }
   };
 
   return (
@@ -113,16 +120,7 @@ function AddVehicleForm() {
         <label className="form-label fw-semibold">
           Image <span className="text-danger">*</span>
         </label>
-        <input
-          type="file"
-          className={`form-control ${imageRequired ? "is-invalid" : ""}`}
-          accept="image/*"
-          onChange={(e) => {
-            const file = e.target.files[0];
-            setImage(file);
-            setImageRequired(false);
-          }}
-        />
+        <input type="file" accept="image/*" onChange={handleImageChange} />
         {imageRequired && (
           <div className="invalid-feedback">Image is required.</div>
         )}

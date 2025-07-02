@@ -3,7 +3,7 @@ import "../../App.css";
 import "./styles/custom.css";
 import { Link } from "react-router-dom";
 import about from "../../assets/template_assets/banner/about home.png";
-import vehicle from "../../assets/Images/vehicles/vehicle2.png";
+import vehicle from "../../assets/Images/vehicles/vehicle5.jfif";
 
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";

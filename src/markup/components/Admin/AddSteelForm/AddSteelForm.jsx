@@ -16,13 +16,13 @@ function AddSteelForm() {
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let valid = true;
 
-    // Image is required
+    // Image validation
     if (!steel_image) {
-      setImageRequired("vehicle image is required");
+      setImageRequired("Steel image is required");
       valid = false;
     } else {
       setImageRequired("");
@@ -44,50 +44,45 @@ function AddSteelForm() {
       setPriceRequired("");
     }
 
-    // If the form is not valid, do not submit
-    if (!valid) {
-      return;
-    }
+    if (!valid) return;
 
-    const formData = {
-      steel_image,
-      steel_type,
-      steel_weight,
-      steel_price_per_ton,
-      steel_total_price,
-    };
-
-    // Pass the form data to the service
-    const newSteel = steelService.createSteel(formData);
-    newSteel
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // If Error is returned from the API server, set the error message
-        if (data.error) {
-          setServerError(data.error);
-        } else {
-          // Handle successful response
-          setSuccess(true);
-          setServerError("");
-          // Redirect to the vehicle page after 2 seconds
-          // For now, just redirect to the home page
-          setTimeout(() => {
-            // window.location.href = '/admin/steel';
-            window.location.href = "/admin/steels"; // Redirect to the vehicles page
-          }, 2000);
-        }
-      })
-      // Handle Catch
-      .catch((error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        setServerError(resMessage);
+    try {
+      // 1. Upload image and get path
+      const formData = new FormData();
+      formData.append("image", steel_image);
+      const uploadRes = await fetch("http://localhost:2716/api/upload", {
+        method: "POST",
+        body: formData,
       });
+      const uploadData = await uploadRes.json();
+      if (!uploadRes.ok)
+        throw new Error(uploadData.error || "Image upload failed");
+
+      // 2. Prepare steel data
+      const steelData = {
+        steel_image: uploadData.imagePath,
+        steel_type,
+        steel_weight,
+        steel_price_per_ton,
+        steel_total_price,
+      };
+
+      // 3. Create steel
+      const response = await steelService.createSteel(steelData);
+      if (response.ok || response.status === 200) {
+        setSuccess(true);
+        setServerError("");
+        setTimeout(() => {
+          window.location.href = "/admin/steels";
+        }, 2000);
+      } else {
+        setServerError("Failed to add steel. Please try again.");
+        setSuccess(false);
+      }
+    } catch (err) {
+      setServerError("Failed to add steel. Please try again.");
+      setSuccess(false);
+    }
   };
 
   return (

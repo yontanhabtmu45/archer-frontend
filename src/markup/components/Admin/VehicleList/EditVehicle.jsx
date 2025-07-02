@@ -10,6 +10,8 @@ function EditVehicle() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [newImageFile, setNewImageFile] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -44,24 +46,58 @@ function EditVehicle() {
 
   const handleChange = (e) => {
     if (!vehicle) return;
-    setVehicle({ ...vehicle, [e.target.name]: e.target.value });
+    const { name, value, files } = e.target;
+    if (name === "vehicle_image" && files && files[0]) {
+      setNewImageFile(files[0]);
+    } else {
+      setVehicle({ ...vehicle, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess("");
+    setLoading(true);
     setError("");
     try {
-      const response = await vehicleService.updateVehicle(id, vehicle);
+      let updatedVehicle = { ...vehicle };
+
+      // If a new image is selected, upload it first
+      if (newImageFile) {
+        const formData = new FormData();
+        formData.append("image", newImageFile);
+        const uploadRes = await fetch("http://localhost:2716/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok)
+          throw new Error(uploadData.error || "Image upload failed");
+        updatedVehicle.vehicle_image = uploadData.imagePath;
+      }
+
+      // Now update the vehicle
+      const response = await fetch(`http://localhost:2716/api/vehicle/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedVehicle),
+      });
       const data = await response.json();
-      if (data.status === "success") {
-        setSuccess("Vehicle updated successfully!");
-        setTimeout(() => Navigate("/admin/vehicles"), 1200);
+      if (response.ok) {
+        setVehicle(data.data || data);
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/admin/vehicles");
+        }, 1000);
       } else {
-        setError(data.message || "Failed to update Vehicle.");
+        setError((data && data.message) || "Failed to update vehicle.");
+        setSuccess(false);
       }
     } catch (err) {
-      setError("Error updating Vehicle.");
+      setError("Error updating vehicle.");
+      setSuccess(false);
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,7 +116,9 @@ function EditVehicle() {
             <AdminMenu />
           </div>
           <div className="col-md-9 edit-admin-form-wrapper p-4">
-            <h2 className="mb-3 text-center text-primary fw-bold">Edit Vehicle</h2>
+            <h2 className="mb-3 text-center text-primary fw-bold">
+              Edit Vehicle
+            </h2>
 
             <div className="admin-alerts-container my-3">
               {error && (
@@ -203,6 +241,14 @@ function EditVehicle() {
                     required
                   />
                 </div>
+                {success && (
+                  <div className="alert alert-success">
+                    Vehicle added successfully!
+                  </div>
+                )}
+                {error && (
+                  <div className="alert alert-danger">{error}</div>
+                )}
 
                 <button type="submit" className="btn btn-primary w-100 mt-3">
                   Update Vehicle
