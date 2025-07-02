@@ -1,4 +1,6 @@
-
+// Import from the env
+// const api_url = process.env.REACT_APP_API_URL;
+const api_url = "https://backend-archer.onrender.com";
 
 // A function to send post request to create a new steel
 const createSteel = async (formData) => {
@@ -7,7 +9,7 @@ const createSteel = async (formData) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   };
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/steel`, requestOptions);
+  const response = await fetch(`${api_url}/api/steel`, requestOptions);
   return response;
 };
 
@@ -17,7 +19,7 @@ const getAllSteels = async (token) => {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-access-token": token },
   };
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/steels`, requestOptions);
+  const response = await fetch(`${api_url}/api/steels`, requestOptions);
   return response;
 };
 
@@ -27,7 +29,7 @@ const getSteelById = async (id, token) => {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-access-token": token },
   };
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/steel/${id}`, requestOptions);
+  const response = await fetch(`${api_url}/api/steel/${id}`, requestOptions);
   return response;
 };
 
@@ -38,7 +40,7 @@ const updateSteel = async (id, formData, token) => {
     headers: { "Content-Type": "application/json", "x-access-token": token },
     body: JSON.stringify(formData),
   };
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/steel/${id}`, requestOptions);
+  const response = await fetch(`${api_url}/api/steel/${id}`, requestOptions);
   return response;
 };
 
@@ -49,7 +51,7 @@ const deleteSteel = async (token, id) => {
     method: "DELETE",
     headers: { "Content-Type": "application/json", "x-access-token": token },
   };
-  return await fetch(`${process.env.REACT_APP_API_URL}/api/steel/${id}`, requestOptions);
+  return await fetch(`${api_url}/api/steel/${id}`, requestOptions);
 };
 
 // Export all the functions
