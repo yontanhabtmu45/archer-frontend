@@ -12,6 +12,8 @@ function EditSteel() {
   const [success, setSuccess] = useState("");
   const [newImageFile, setNewImageFile] = useState(null);
 
+  const api_url = "https://backend-archer.onrender.com"
+
   useEffect(() => {
     if (!id) {
       setError("Invalid steel ID.");
@@ -67,7 +69,7 @@ function EditSteel() {
       if (newImageFile) {
         const formData = new FormData();
         formData.append("image", newImageFile);
-        const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
+        const uploadRes = await fetch(`${api_url}/api/upload`, {
           method: "POST",
           body: formData,
         });
@@ -78,7 +80,7 @@ function EditSteel() {
       }
 
       // Now update the steel
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/steel/${id}`, {
+      const response = await fetch(`${api_url}/api/steel/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedSteel),

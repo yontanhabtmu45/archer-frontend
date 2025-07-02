@@ -13,6 +13,8 @@ function EditVehicle() {
   const [newImageFile, setNewImageFile] = useState(null);
   const navigate = useNavigate();
 
+  const api_url = "https://backend-archer.onrender.com"
+
   useEffect(() => {
     const fetchVehicle = async () => {
       setError("");
@@ -65,7 +67,7 @@ function EditVehicle() {
       if (newImageFile) {
         const formData = new FormData();
         formData.append("image", newImageFile);
-        const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
+        const uploadRes = await fetch(`${api_url}/api/upload`, {
           method: "POST",
           body: formData,
         });
@@ -76,7 +78,7 @@ function EditVehicle() {
       }
 
       // Now update the vehicle
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/vehicle/${id}`, {
+      const response = await fetch(`${api_url}/api/vehicle/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedVehicle),
