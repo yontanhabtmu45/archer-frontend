@@ -73,7 +73,7 @@ function Steels() {
                   <div className="card text-center">
                     <div>
                       <img
-                        src={`http://localhost:2716/images/${steel.steel_image}`}
+                        src={`https://backend-archer.onrender.com/images/${steel.steel_image}`}
                         alt={steel.steel_type}
                         style={{
                           width: "300px",

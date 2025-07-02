@@ -80,7 +80,7 @@ function Cars() {
                   <div className="card text-center">
                     <div>
                       <img
-                        src={`http://localhost:2716/images/${vehicle.vehicle_image}`}
+                        src={`https://backend-archer.onrender.com/images/${vehicle.vehicle_image}`}
                         alt={vehicle.vehicle_model}
                         // loading="lazy"
                         style={{
