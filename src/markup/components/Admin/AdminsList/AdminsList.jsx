@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 // Import the auth hook
 import { useAuth } from "../../../../Context/AuthContext";
@@ -34,7 +34,7 @@ function AdminsList() {
     token = admin.admin_token;
   }
 
-    const fetchAdmins = () => {
+  const fetchAdmins = () => {
     // Call the getAllAdmins function
     const allAdmins = adminService.getAllAdmins(token);
     allAdmins
@@ -61,15 +61,14 @@ function AdminsList() {
       .catch((err) => {
         // console.log(err);
       });
-    }
+  };
 
-    useEffect(() => {
-      fetchAdmins();
-    }, [token]);
-
+  useEffect(() => {
+    fetchAdmins();
+  }, [token]);
 
   // Delete an admin
-  
+
   const handleDelete = async (id) => {
     setError("");
     setSuccess("");
@@ -132,56 +131,58 @@ function AdminsList() {
                     </div>
                   )}
                 </div>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Added Date</th>
-                      <th>Role</th>
-                      <th>Edit/Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {admins.map((admin, idx) => (
-                      <tr key={admin.admin_id}>
-                        <td>{idx + 1}</td>
-                        <td>{admin.admin_first_name}</td>
-                        <td>{admin.admin_last_name}</td>
-                        <td>{admin.admin_email}</td>
-                        <td>{admin.admin_phone}</td>
-                        <td>
-                          {format(
-                            new Date(admin.added_date),
-                            "MM - dd - yyyy "
-                          )}
-                        </td>
-                        <td>{admin.company_role_name}</td>
-                        <td>
-                          <div className="edit-delete-icons d-flex justify-center align-center">
-                            <div className="edit">
-                              <Link
-                                to={`/admin/${admin.admin_id}`}
-                                // className="btn btn-primary btn-sm ms-2"
-                              >
-                                <EditOutlinedIcon /> |
-                              </Link>
-                            </div>
-                            <div
-                              className="delete"
-                              onClick={() => handleDelete(admin.admin_id)}
-                            >
-                              <DeleteOutlineOutlinedIcon />
-                            </div>
-                          </div>
-                        </td>
+                <div className="vehicle-table-responsive">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Added Date</th>
+                        <th>Role</th>
+                        <th>Edit/Delete</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {admins.map((admin, idx) => (
+                        <tr key={admin.admin_id}>
+                          <td>{idx + 1}</td>
+                          <td>{admin.admin_first_name}</td>
+                          <td>{admin.admin_last_name}</td>
+                          <td>{admin.admin_email}</td>
+                          <td>{admin.admin_phone}</td>
+                          <td>
+                            {format(
+                              new Date(admin.added_date),
+                              "MM - dd - yyyy "
+                            )}
+                          </td>
+                          <td>{admin.company_role_name}</td>
+                          <td>
+                            <div className="edit-delete-icons d-flex justify-center align-center">
+                              <div className="edit">
+                                <Link
+                                  to={`/admin/${admin.admin_id}`}
+                                  // className="btn btn-primary btn-sm ms-2"
+                                >
+                                  <EditOutlinedIcon /> |
+                                </Link>
+                              </div>
+                              <div
+                                className="delete"
+                                onClick={() => handleDelete(admin.admin_id)}
+                              >
+                                <DeleteOutlineOutlinedIcon />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
               </div>
             </div>
           </section>

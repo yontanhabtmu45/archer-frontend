@@ -76,7 +76,7 @@ function Cars() {
               )}
 
               {filteredVehicles.map((vehicle) => (
-                <div className="card-cars mb-3" key={vehicle.vehicle_id}>
+                <div className="card-cars mb-3  d-flex justify-center align-center" key={vehicle.vehicle_id}>
                   <div className="card text-center">
                     <div>
                       <img
