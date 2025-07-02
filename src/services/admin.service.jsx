@@ -1,7 +1,3 @@
-// Import from the env 
-// const api_url = process.env.REACT_APP_API_URL;
-const api_url = 'http://localhost:2716';
-
 // A function to send post request to create a new Admin 
 const createAdmin = async (formData) => {
   const requestOptions = {
@@ -9,7 +5,7 @@ const createAdmin = async (formData) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData)
   };
-  const response = await fetch(`${api_url}/api/admin`, requestOptions);
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admin`, requestOptions);
   return response;
 }
 // A function to send get request to get all Admins
@@ -19,7 +15,7 @@ const getAllAdmins = async (token) => {
     headers: { 'Content-Type': 'application/json', 
       'x-access-token': token }
   };
-  const response = await fetch(`${api_url}/api/admins`, requestOptions);
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admins`, requestOptions);
   return response;
 }
 
@@ -29,7 +25,7 @@ const getAdmin = async (id) => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' }
     };
-    const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/${id}`, requestOptions);
     return response;
 }
 
@@ -40,7 +36,7 @@ const updateAdmin = async (id, formData) =>{
     headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
       };
-      const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/${id}`, requestOptions);
       return response;
 }
 
@@ -51,7 +47,7 @@ const deleteAdmin = async (id, token) => {
     headers: { 'Content-Type': 'application/json',
       'x-access-token': token }
   };
-  const response = await fetch(`${api_url}/api/admin/${id}`, requestOptions);
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/${id}`, requestOptions);
   return response;
 }
 

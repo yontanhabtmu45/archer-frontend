@@ -1,6 +1,4 @@
-// Import from the env
-// const api_url = process.env.REACT_APP_API_URL;
-const api_url = "http://localhost:2716";
+
 
 // A function to send post request to create a new vehicle
 const createVehicle = async (formData) => {
@@ -9,7 +7,7 @@ const createVehicle = async (formData) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   };
-  const response = await fetch(`${api_url}/api/vehicle`, requestOptions);
+  const response = await fetch(`${process.env.REACT_APP_API_URL }/api/vehicle`, requestOptions);
   return response;
 };
 
@@ -19,7 +17,7 @@ const getAllVehicles = async (token) => {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-access-token": token },
   };
-  const response = await fetch(`${api_url}/api/vehicles`, requestOptions);
+  const response = await fetch(`${process.env.REACT_APP_API_URL }/api/vehicles`, requestOptions);
   return response;
 };
 
@@ -32,7 +30,7 @@ const getVehicle = async (id, token) => {
       "x-access-token": token,
     },
   };
-  const response = await fetch(`${api_url}/api/vehicle/${id}`, requestOptions);
+  const response = await fetch(`${process.env.REACT_APP_API_URL }/api/vehicle/${id}`, requestOptions);
   return response;
 };
 
@@ -46,7 +44,7 @@ const updateVehicle = async (id, vehicleData, token) => {
     },
     body: JSON.stringify(vehicleData),
   };
-  return await fetch(`${api_url}/api/vehicle/${id}`, requestOptions);
+  return await fetch(`${process.env.REACT_APP_API_URL }/api/vehicle/${id}`, requestOptions);
 };
 
 // Delete vehicle by ID
@@ -58,7 +56,7 @@ const deleteVehicle = async (id, token) => {
       "x-access-token": token,
     },
   };
-  return await fetch(`${api_url}/api/vehicle/${id}`, requestOptions);
+  return await fetch(`${process.env.REACT_APP_API_URL }/api/vehicle/${id}`, requestOptions);
 };
 
 // Export all the functions
