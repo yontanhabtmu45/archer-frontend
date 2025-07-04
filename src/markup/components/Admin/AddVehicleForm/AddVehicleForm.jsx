@@ -104,12 +104,12 @@ function AddVehicleForm() {
           window.location.href = "/admin/vehicles";
         }, 2000);
       } else {
-        setServerError(data?.error || "Failed to add vehicle.");
+        setServerError(response.data?.message || "Failed to add vehicle.");
         setSuccess(false);
       }
     } catch (err) {
-      console.log(err)
-      setServerError("Failed to add vehicle. Please try again.");
+      console.log("Vehicle create error:", err?.response?.data || err.message || err)
+      setServerError(err?.response?.data?.message || "Failed to add vehicle. Please try again.");
       setSuccess(false);
     }
   };
