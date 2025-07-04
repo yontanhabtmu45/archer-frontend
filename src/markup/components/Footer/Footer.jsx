@@ -143,7 +143,10 @@ function Footer() {
               <div className="text-center">
                 <p className="text-center">
                   &copy; {new Date().getFullYear()} Archer Wholesale. All rights
-                  reserved.
+                  reserved. <br /> <br />
+                  <a href="https://yonatan-habtamu.vercel.app/" target="_blank">
+                  Developed By Jhan.
+                  </a>
                 </p>
               </div>
             </div>
