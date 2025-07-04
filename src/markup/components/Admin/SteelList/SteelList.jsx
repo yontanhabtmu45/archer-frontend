@@ -6,6 +6,9 @@ import { useAuth } from "../../../../Context/AuthContext";
 import { format } from "date-fns";
 // Import the getAllSteel function
 import steelService from "../../../../services/steel.service";
+
+import SearchIcon from "@mui/icons-material/Search";
+
 import { Link } from "react-router-dom";
 import AdminMenu from "../AdminMenu/AdminMenu";
 
@@ -26,6 +29,9 @@ function SteelList() {
   const [Error, setError] = useState("");
   //  A state to store success message
   const [Success, setSuccess] = useState("");
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   // To get the logged in admin token
   const { admin } = useAuth();
   let token = ""; // To store the token
@@ -98,6 +104,13 @@ function SteelList() {
     }
   };
 
+  const filteredSteels = steels.filter((steel) =>
+    [steel.steel_type]
+      .join(" ")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       {apiError ? (
@@ -135,6 +148,15 @@ function SteelList() {
                     </div>
                   )}
                 </div>
+                <div className="search-bar admin-bar">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search steels by type or category"
+                  />
+                  <SearchIcon />
+                </div>
                 <div className="vehicle-table-responsive">
                   <Table striped bordered hover>
                     <thead>
@@ -149,42 +171,45 @@ function SteelList() {
                       </tr>
                     </thead>
                     <tbody>
-                      {steels.map((steel, idx) => (
-                        <tr key={steel.steel_id}>
-                          <td>{idx + 1}</td>
-                          <td>{steel.steel_image}</td>
-                          <td>{steel.steel_type}</td>
-                          <td>{steel.steel_price_per_ton}</td>
-                          <td>{steel.steel_total_price}</td>
-                          <td>
-                            {steel.steel_added_date
-                              ? format(
-                                  new Date(steel.steel_added_date),
-                                  "MM - dd - yyyy"
-                                )
-                              : "N/A"}
-                          </td>
-                          <td>
-                            <div className="edit-delete-icons d-flex justify-center align-center">
-                              <div className="edit">
-                                <Link
-                                  to={`/admin/steel/${steel.steel_iden_id}`}
+                      {filteredSteels
+                        .slice()
+                        .sort((a, b) => b.steel_id - a.steel_id)
+                        .map((steel, idx) => (
+                          <tr key={steel.steel_id}>
+                            <td>{idx + 1}</td>
+                            <td>{steel.steel_image}</td>
+                            <td>{steel.steel_type}</td>
+                            <td>{steel.steel_price_per_ton}</td>
+                            <td>{steel.steel_total_price}</td>
+                            <td>
+                              {steel.steel_added_date
+                                ? format(
+                                    new Date(steel.steel_added_date),
+                                    "MM - dd - yyyy"
+                                  )
+                                : "N/A"}
+                            </td>
+                            <td>
+                              <div className="edit-delete-icons d-flex justify-center align-center">
+                                <div className="edit">
+                                  <Link
+                                    to={`/admin/steel/${steel.steel_iden_id}`}
+                                  >
+                                    <EditOutlinedIcon /> |
+                                  </Link>
+                                </div>
+                                <div
+                                  className="delete"
+                                  onClick={() =>
+                                    handleDeleteSteel(steel.steel_iden_id)
+                                  }
                                 >
-                                  <EditOutlinedIcon /> |
-                                </Link>
+                                  <DeleteOutlineOutlinedIcon />
+                                </div>
                               </div>
-                              <div
-                                className="delete"
-                                onClick={() =>
-                                  handleDeleteSteel(steel.steel_iden_id)
-                                }
-                              >
-                                <DeleteOutlineOutlinedIcon />
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </div>

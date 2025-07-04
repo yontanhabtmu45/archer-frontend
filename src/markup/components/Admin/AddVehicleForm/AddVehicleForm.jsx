@@ -67,9 +67,11 @@ function AddVehicleForm() {
       const uploadRes = await axios.post("/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      const uploadData = await uploadRes.json();
-      if (!uploadRes.ok)
+      const uploadData = uploadRes.data;
+      if (uploadRes.status !== 200)
         throw new Error(uploadData.error || "Image upload failed");
+      // if (!uploadRes.ok)
+      //   throw new Error(uploadData.error || "Image upload failed");
       // const uploadRes = await fetch(`${api_url}/api/upload`, {
       //   method: "POST",
       //   body: formData,
@@ -90,23 +92,23 @@ function AddVehicleForm() {
         vehicle_color,
         vehicle_total_price,
       };
+      // console.log("Submitting vehicleData:", vehicleData);
 
       // 3. Create vehicle
       const response = await vehicleService.createVehicle(vehicleData);
-      const data = await response.json();
-      console.log("Vehicle create response:", response, data);
 
-      if (data && data.vehicle_iden_id) {
+      if (response.status === 200) {
         setSuccess(true);
         setServerError("");
         setTimeout(() => {
           window.location.href = "/admin/vehicles";
         }, 2000);
       } else {
-        setServerError(data?.error || "Failed to add vehicle. Please try again.");
+        setServerError(data?.error || "Failed to add vehicle.");
         setSuccess(false);
       }
     } catch (err) {
+      console.log(err)
       setServerError("Failed to add vehicle. Please try again.");
       setSuccess(false);
     }

@@ -25,7 +25,7 @@ function Cars() {
     axios
       .get("/vehicles")
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setVehicles(res.data.data);
         setIsLoading(false);
       })
@@ -77,7 +77,7 @@ function Cars() {
 
               {filteredVehicles
                 .slice()
-                .sort((a, b) => b.steel_id - a.steel_id)
+                .sort((a, b) => b.vehicle_id - a.vehicle_id)
                 .map((vehicle) => (
                   <div
                     className="card-cars mb-3  d-flex justify-center align-center"
@@ -88,7 +88,7 @@ function Cars() {
                         <img
                           src={`https://backend-archer.onrender.com/images/${vehicle.vehicle_image}`}
                           alt={vehicle.vehicle_model}
-                          // loading="lazy"
+                          loading="lazy"
                           style={{
                             width: "300px",
                             maxHeight: "200px",

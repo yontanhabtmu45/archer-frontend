@@ -4,6 +4,10 @@ import { Table, Button } from "react-bootstrap";
 import { useAuth } from "../../../../Context/AuthContext";
 // Import the date-fns library
 import { format } from "date-fns";
+
+import SearchIcon from "@mui/icons-material/Search";
+
+
 // Import the getAllVehicle function
 import vehicleService from "../../../../services/vehicle.service";
 import AdminMenu from "../AdminMenu/AdminMenu";
@@ -26,6 +30,9 @@ function VehicleList() {
   const [Error, setError] = useState("");
   //  A state to store success message
   const [Success, setSuccess] = useState("");
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   // To get the logged in admin token
   const { admin } = useAuth();
   let token = ""; // To store the token
@@ -60,18 +67,18 @@ function VehicleList() {
       .catch((err) => {
         // console.log(err);
       });
-    }
+  };
 
-    useEffect(() => {
-      fetchVehicles();
-        }, [token]);
+  useEffect(() => {
+    fetchVehicles();
+  }, [token]);
 
   const handleDeleteVehicle = async (id) => {
     setError("");
     setSuccess("");
     try {
       const response = await vehicleService.deleteVehicle(id, token);
-      window.confirm("Are you sure want to delete!")
+      window.confirm("Are you sure want to delete!");
       const data = await response.json();
       if (data.status === "success") {
         setSuccess("Vehicle deleted successfully!");
@@ -81,7 +88,9 @@ function VehicleList() {
           fetchVehicles();
         }, 1500);
       } else {
-        setError(data.message || "An error occurred while deleting the Vehicle.");
+        setError(
+          data.message || "An error occurred while deleting the Vehicle."
+        );
         setTimeout(() => setError(""), 2000);
       }
     } catch (err) {
@@ -90,6 +99,13 @@ function VehicleList() {
       console.log(err);
     }
   };
+
+  const filteredVehicles = vehicles.filter((vehicle) =>
+    [vehicle.vehicle_model, vehicle.vehicle_tag, vehicle.vehicle_type]
+      .join(" ")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -115,6 +131,15 @@ function VehicleList() {
                     Here you can see all the vehicle of the company. You can
                     edit or delete any vehicles from this list.
                   </div>
+                </div>
+                <div className="search-bar admin-bar">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search vehicles by name , model, year, etc."
+                  />
+                  <SearchIcon />
                 </div>
                 <div className="admin-alerts-container my-3">
                   {Error && (
@@ -148,45 +173,54 @@ function VehicleList() {
                       </tr>
                     </thead>
                     <tbody>
-                      {vehicles.map((vehicle, idx) => {
-                        // console.log(vehicle); 
-                        return (
-                          <tr key={vehicle.vehicle_id}>
-                            <td>{idx + 1}</td>
-                            <td>{vehicle.vehicle_image}</td>
-                            <td>{vehicle.vehicle_year}</td>
-                            <td>{vehicle.vehicle_make}</td>
-                            <td>{vehicle.vehicle_model}</td>
-                            <td>{vehicle.vehicle_type}</td>
-                            <td>{vehicle.vehicle_mileage}</td>
-                            <td>{vehicle.vehicle_tag}</td>
-                            <td>{vehicle.vehicle_serial}</td>
-                            <td>{vehicle.vehicle_color}</td>
-                            <td>{vehicle.vehicle_total_price}</td>
-                            <td>
-                              {format(
-                                new Date(vehicle.vehicle_added_date),
-                                "MM - dd - yyyy "
-                              )}
-                            </td>
-                            <td>
-                              <div className="edit-delete-icons d-flex justify-center align-center">
-                                <div className="edit">
-                                  <Link to={`/admin/vehicle/${vehicle.vehicle_iden_id}`}>
-                                    <EditOutlinedIcon /> |
-                                  </Link>
+                      {filteredVehicles
+                        .slice()
+                        .sort((a, b) => b.vehicle_id - a.vehicle_id)
+                        .map((vehicle, idx) => {
+                          // console.log(vehicle);
+                          return (
+                            <tr key={vehicle.vehicle_id}>
+                              <td>{idx + 1}</td>
+                              <td>{vehicle.vehicle_image}</td>
+                              <td>{vehicle.vehicle_year}</td>
+                              <td>{vehicle.vehicle_make}</td>
+                              <td>{vehicle.vehicle_model}</td>
+                              <td>{vehicle.vehicle_type}</td>
+                              <td>{vehicle.vehicle_mileage}</td>
+                              <td>{vehicle.vehicle_tag}</td>
+                              <td>{vehicle.vehicle_serial}</td>
+                              <td>{vehicle.vehicle_color}</td>
+                              <td>{vehicle.vehicle_total_price}</td>
+                              <td>
+                                {format(
+                                  new Date(vehicle.vehicle_added_date),
+                                  "MM - dd - yyyy "
+                                )}
+                              </td>
+                              <td>
+                                <div className="edit-delete-icons d-flex justify-center align-center">
+                                  <div className="edit">
+                                    <Link
+                                      to={`/admin/vehicle/${vehicle.vehicle_iden_id}`}
+                                    >
+                                      <EditOutlinedIcon /> |
+                                    </Link>
+                                  </div>
+                                  <div
+                                    className="delete"
+                                    onClick={() =>
+                                      handleDeleteVehicle(
+                                        vehicle.vehicle_iden_id
+                                      )
+                                    }
+                                  >
+                                    <DeleteOutlineOutlinedIcon />
+                                  </div>
                                 </div>
-                                <div
-                                  className="delete"
-                                  onClick={() => handleDeleteVehicle(vehicle.vehicle_iden_id)}
-                                >
-                                  <DeleteOutlineOutlinedIcon />
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </Table>
                 </div>

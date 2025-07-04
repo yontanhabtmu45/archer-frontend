@@ -21,7 +21,7 @@ function Steels() {
     axios
       .get("/steels")
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setSteels(res.data.data);
         setIsLoading(false);
       })
