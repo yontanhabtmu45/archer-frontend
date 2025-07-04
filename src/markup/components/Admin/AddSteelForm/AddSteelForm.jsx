@@ -9,6 +9,8 @@ function AddSteelForm() {
   const [steel_price_per_ton, setPricePerTon] = useState("");
   const [steel_total_price, setTotalPrice] = useState("");
 
+  const api_url = 'https://backend-archer.onrender.com'
+
   // Errors
   const [imageRequired, setImageRequired] = useState(false);
   const [typeRequired, setTypeRequired] = useState(false);
@@ -50,7 +52,7 @@ function AddSteelForm() {
       // 1. Upload image and get path
       const formData = new FormData();
       formData.append("image", steel_image);
-      const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
+      const uploadRes = await fetch(`${api_url}/api/upload`, {
         method: "POST",
         body: formData,
       });

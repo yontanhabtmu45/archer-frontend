@@ -14,6 +14,8 @@ function Steels() {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const api_url = "https://backend-archer.onrender.com";
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -68,28 +70,32 @@ function Steels() {
               {!isLoading && filteredSteels.length === 0 && (
                 <p>No vehicles found for "{searchTerm}".</p>
               )}
-              {filteredSteels.map((steel) => (
-                <div className="card-cars mb-3" key={steel.steel_id}>
-                  <div className="card text-center">
-                    <div>
-                      <img
-                        src={`https://backend-archer.onrender.com/images/${steel.steel_image}`}
-                        alt={steel.steel_type}
-                        style={{
-                          width: "300px",
-                          maxHeight: "200px",
-                          objectFit: "cover",
-                        }}
-                      />
+              {filteredSteels
+                .slice() 
+                .sort((a, b) => b.steel_id - a.steel_id)
+                .map((steel) => (
+                  <div className="card-cars mb-3" key={steel.steel_id}>
+                    <div className="card text-center">
+                      <div>
+                        <img
+                          src={`${api_url}/images/${steel.steel_image}`}
+                          alt={steel.steel_type}
+                          style={{
+                            width: "300px",
+                            maxHeight: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                      <h2>{steel.steel_type}</h2>
+                      <p>Weight/ton: {steel.steel_weight}</p>
+                      <small className="card-price">
+                        <CurrencyFormat amount={steel.steel_price_per_ton} />{" "}
+                        Birr
+                      </small>
                     </div>
-                    <h2>{steel.steel_type}</h2>
-                    <p>Weight/ton: {steel.steel_weight}</p>
-                    <small className="card-price">
-                      <CurrencyFormat amount={steel.steel_price_per_ton} /> Birr
-                    </small>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>

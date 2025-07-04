@@ -16,6 +16,8 @@ function AddVehicleForm() {
   const [vehicle_color, setColor] = useState("");
   const [vehicle_total_price, setTotalPrice] = useState("");
 
+  const api_url = 'https://backend-archer.onrender.com'
+
   // ERRORS
   const [imageRequired, setImageRequired] = useState("");
   const [modelRequired, setModelRequired] = useState("");
@@ -65,42 +67,43 @@ function AddVehicleForm() {
       const uploadRes = await axios.post("/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      const imagePath = uploadRes.data.imagePath;
-      // .catch(err => console.log(err))
-      // const uploadRes = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
+      const uploadData = await uploadRes.json();
+      if (!uploadRes.ok)
+        throw new Error(uploadData.error || "Image upload failed");
+      // const uploadRes = await fetch(`${api_url}/api/upload`, {
       //   method: "POST",
       //   body: formData,
       // });
-      // const uploadData = await uploadRes.json();
-      // if (!uploadRes.ok)
-      //   throw new Error(uploadData.error || "Image upload failed");
+      // const imagePath = uploadRes.data.imagePath;
+      // .catch(err => console.log(err))
 
       // 2. Prepare vehicle data
       const vehicleData = {
-        vehicle_model,
+        vehicle_image: uploadData.imagePath,
         vehicle_year,
         vehicle_make,
+        vehicle_model,
         vehicle_type,
         vehicle_mileage,
         vehicle_tag,
         vehicle_serial,
         vehicle_color,
         vehicle_total_price,
-        // vehicle_image: imagePath,
       };
 
       // 3. Create vehicle
       const response = await vehicleService.createVehicle(vehicleData);
+      const data = await response.json();
+      console.log("Vehicle create response:", response, data);
 
-      if (response.ok) {
+      if (data && data.vehicle_iden_id) {
         setSuccess(true);
         setServerError("");
-        // Optionally reset form here
         setTimeout(() => {
-          window.location.href = "/admin/vehicles"; // Redirect to the vehicles page
+          window.location.href = "/admin/vehicles";
         }, 2000);
       } else {
-        setServerError("Failed to add vehicle. Please try again.");
+        setServerError(data?.error || "Failed to add vehicle. Please try again.");
         setSuccess(false);
       }
     } catch (err) {

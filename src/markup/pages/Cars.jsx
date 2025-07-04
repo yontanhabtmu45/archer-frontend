@@ -75,31 +75,37 @@ function Cars() {
                 <p>No vehicles found for "{searchTerm}".</p>
               )}
 
-              {filteredVehicles.map((vehicle) => (
-                <div className="card-cars mb-3  d-flex justify-center align-center" key={vehicle.vehicle_id}>
-                  <div className="card text-center">
-                    <div>
-                      <img
-                        src={`https://backend-archer.onrender.com/images/${vehicle.vehicle_image}`}
-                        alt={vehicle.vehicle_model}
-                        // loading="lazy"
-                        style={{
-                          width: "300px",
-                          maxHeight: "200px",
-                          objectFit: "cover",
-                        }}
-                      />
+              {filteredVehicles
+                .slice()
+                .sort((a, b) => b.steel_id - a.steel_id)
+                .map((vehicle) => (
+                  <div
+                    className="card-cars mb-3  d-flex justify-center align-center"
+                    key={vehicle.vehicle_id}
+                  >
+                    <div className="card text-center">
+                      <div>
+                        <img
+                          src={`https://backend-archer.onrender.com/images/${vehicle.vehicle_image}`}
+                          alt={vehicle.vehicle_model}
+                          // loading="lazy"
+                          style={{
+                            width: "300px",
+                            maxHeight: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                      <h2>{vehicle.vehicle_model}</h2>
+                      <p>{vehicle.vehicle_tag}</p>
+                      <small className="card-price">
+                        <CurrencyFormat amount={vehicle.vehicle_total_price} />{" "}
+                        Birr
+                      </small>
+                      <h4 className="vehicle-type">{vehicle.vehicle_type}</h4>
                     </div>
-                    <h2>{vehicle.vehicle_model}</h2>
-                    <p>{vehicle.vehicle_tag}</p>
-                    <small className="card-price">
-                      <CurrencyFormat amount={vehicle.vehicle_total_price} />{" "}
-                      Birr
-                    </small>
-                    <h4 className='vehicle-type'>{vehicle.vehicle_type}</h4>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
 
             {/* {paginatedCars.length < cars.length && (
