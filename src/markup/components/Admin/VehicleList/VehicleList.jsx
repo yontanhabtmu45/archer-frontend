@@ -101,7 +101,7 @@ function VehicleList() {
   };
 
   const filteredVehicles = vehicles.filter((vehicle) =>
-    [vehicle.vehicle_model, vehicle.vehicle_tag, vehicle.vehicle_type]
+    [vehicle.vehicle_model, vehicle.vehicle_tag, vehicle.vehicle_type, vehicle.vehicle_serial]
       .join(" ")
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
@@ -137,7 +137,7 @@ function VehicleList() {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search vehicles by name , model, year, etc."
+                    placeholder="Search vehicles by name , model, year, serial, etc."
                   />
                   <SearchIcon />
                 </div>
