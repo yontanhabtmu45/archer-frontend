@@ -138,6 +138,7 @@ function AddVehicleForm() {
           value={vehicle_year}
           onChange={(e) => setYear(e.target.value)}
           placeholder="Enter year"
+          required
         />
       </div>
       <div className="mb-3">
@@ -148,6 +149,7 @@ function AddVehicleForm() {
           value={vehicle_make}
           onChange={(e) => setMake(e.target.value)}
           placeholder="Enter make"
+          required
         />
       </div>
       <div className="mb-3">
@@ -176,6 +178,7 @@ function AddVehicleForm() {
           value={vehicle_type}
           onChange={(e) => setType(e.target.value)}
           placeholder="Enter type"
+          required
         />
       </div>
       <div className="mb-3">
@@ -186,6 +189,7 @@ function AddVehicleForm() {
           value={vehicle_mileage}
           onChange={(e) => setMileage(e.target.value)}
           placeholder="Enter mileage"
+          required
         />
       </div>
       <div className="mb-3">
@@ -196,6 +200,7 @@ function AddVehicleForm() {
           value={vehicle_tag}
           onChange={(e) => setTag(e.target.value)}
           placeholder="Enter tag"
+          required
         />
       </div>
       <div className="mb-3">
@@ -208,6 +213,7 @@ function AddVehicleForm() {
           value={vehicle_serial}
           onChange={(e) => setSerial(e.target.value)}
           placeholder="Enter serial"
+          required
         />
       </div>
       <div className="mb-3">
@@ -218,6 +224,7 @@ function AddVehicleForm() {
           value={vehicle_color}
           onChange={(e) => setColor(e.target.value)}
           placeholder="Enter color"
+          required
         />
       </div>
       <div className="mb-3">
